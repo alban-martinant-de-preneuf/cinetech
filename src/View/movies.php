@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,12 +9,19 @@
     <link rel="stylesheet" href="/cinetech/public/css/style.css">
     <title>Cinetech</title>
     <script src="/cinetech/public/js/header.js" defer></script>
-    <script src="/cinetech/public/js/home.js" defer></script>
+    <script src="/cinetech/public/js/movies.js" defer></script>
 </head>
+
 <body>
     <?php require_once('includes/header.php'); ?>
 
-    <div id="main_container"></div>
-    
+    <div id="main_container">
+        <main>
+            <h1>Les films</h1>
+            <div id="main_container"></div>
+        </main>
+    </div>
+
 </body>
+
 </html>

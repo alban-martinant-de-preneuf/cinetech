@@ -1,3 +1,50 @@
+
+async function getData(url) {
+    const response = await fetch(url, options)
+    const populars = await response.json();
+    return populars.results
+}
+
+function displayContent() {
+    trendingMoviesDiv = (document.createElement('div'));
+    trendingMoviesDiv.classList.add('popular_div');
+
+    getData('https://api.themoviedb.org/3/trending/movie/day?language=fr-FR&page=1').then(items => {
+        trendingMoviesDiv.innerHTML = '<h2>Films tendance';
+        for (let i = 0; i < 4; i++) {
+            console.log(items[i])
+            trendingMoviesDiv.innerHTML += (`
+                <div class="item_div">
+                    <div class="image_container">
+                        <img src="https://image.tmdb.org/t/p/w342/${items[i].poster_path}">
+                    </div>
+                    <h3>${items[i].title}</h3>
+                </div>
+            `)
+        }
+    })
+    mainContainer.appendChild(trendingMoviesDiv)
+
+    trendingTvDiv = (document.createElement('div'));
+    trendingTvDiv.classList.add('popular_div');
+
+    getData('https://api.themoviedb.org/3/trending/tv/day?language=fr-FR&page=1').then(items => {
+        trendingTvDiv.innerHTML = '<h2>Series tendance';
+        for (let i = 0; i < 4; i++) {
+            console.log(items[i])
+            trendingTvDiv.innerHTML += (`
+                <div class="item_div">
+                    <div class="image_container">
+                        <img src="https://image.tmdb.org/t/p/w342/${items[i].poster_path}">
+                    </div>
+                    <h3>${items[i].name}</h3>
+                </div>
+            `)
+        }
+    })
+    mainContainer.appendChild(trendingTvDiv)
+}
+
 const mainContainer = document.getElementById('main_container');
 
 const options = {
@@ -8,44 +55,4 @@ const options = {
     }
 };
 
-async function getData(url) {
-    const response = await fetch(url, options)
-    const populars = await response.json();
-    return populars.results
-}
-
-getData('https://api.themoviedb.org/3/trending/movie/day?language=fr-FR&page=1').then(items => {
-    trendingMoviesDiv = (document.createElement('div'));
-    trendingMoviesDiv.classList.add('popular_div');
-    trendingMoviesDiv.innerHTML = '<h2>Films tendance';
-    for (let i = 0; i < 4; i++) {
-        console.log(items[i])
-        trendingMoviesDiv.innerHTML += (`
-            <div class="item_div">
-                <div class="image_container">
-                    <img src="https://image.tmdb.org/t/p/w342/${items[i].poster_path}">
-                </div>
-                <h3>${items[i].title}</h3>
-            </div>
-        `)
-    }
-    mainContainer.appendChild(trendingMoviesDiv)
-})
-
-getData('https://api.themoviedb.org/3/trending/tv/day?language=fr-FR&page=1').then(items => {
-    trendingTvDiv = (document.createElement('div'));
-    trendingTvDiv.classList.add('popular_div');
-    trendingTvDiv.innerHTML = '<h2>Series tendance';
-    for (let i = 0; i < 4; i++) {
-        console.log(items[i])
-        trendingTvDiv.innerHTML += (`
-                <div class="item_div">
-                    <div class="image_container">
-                        <img src="https://image.tmdb.org/t/p/w342/${items[i].poster_path}">
-                    </div>
-                    <h3>${items[i].name}</h3>
-                </div>
-            `)
-    }
-    mainContainer.appendChild(trendingTvDiv)
-})
+displayContent();

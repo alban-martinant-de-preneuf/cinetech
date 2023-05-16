@@ -11,7 +11,12 @@
   $router->map('GET', '/', function () {
     $homeController = new HomeController();
     $homeController->getHome();
-  }, 'home');
+  });
+
+  $router->map('GET', '/movies', function () {
+    $homeController = new HomeController();
+    $homeController->getMovies();
+  });
 
   // match current request url
   $match = $router->match();
