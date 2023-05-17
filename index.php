@@ -1,21 +1,46 @@
  <?php
 
- require_once 'vendor/autoload.php';
+ use App\Controller\HomeController;
+ use App\Controller\MovieController;
 
- $router = new AltoRouter();
- 
- $router->setBasePath('/cinetech');
+  require_once 'vendor/autoload.php';
 
- $router->map('GET', '/', function () {
-   echo "OK";
-  }, 'home');
+  $router = new AltoRouter();
+
+  $router->setBasePath('/cinetech');
+
+  $router->map('GET', '/', function () {
+    $homeController = new HomeController();
+    $homeController->getHome();
+  });
+
+  $router->map('GET', '/movies', function () {
+    $homeController = new HomeController();
+    $homeController->getMovies();
+  });
+
+  $router->map('GET', '/tvs', function () {
+    $homeController = new HomeController();
+    $homeController->getTvs();
+  });
+
+  $router->map('GET', '/movies/[i:id]', function ($id) {
+    $movieController = new MovieController();
+    $movieController->getMovie();
+  });
+
+  $router->map('GET', '/tvs/[i:id]', function ($id) {
+    $movieController = new MovieController();
+    $movieController->getTv();
+  });
   
- // match current request url
+
+  // match current request url
   $match = $router->match();
- // call closure or throw 404 status
-  if ( is_array($match) && is_callable( $match['target']) ) {
-    call_user_func_array( $match['target'], $match['params'] ); 
+  // call closure or throw 404 status
+  if (is_array($match) && is_callable($match['target'])) {
+    call_user_func_array($match['target'], $match['params']);
   } else {
-  // no route was matched
-  header( $_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+    // no route was matched
+    header($_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
   }
