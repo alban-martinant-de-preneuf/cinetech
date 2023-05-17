@@ -1,3 +1,8 @@
+body {
+    background-color: black;
+    color: #e9e9e9;
+}
+
 /* header */
 
 header {
@@ -6,9 +11,10 @@ header {
     justify-content: space-between;
 }
 
-header h1 {
-    font-size: 2em;
-    text-align: center;
+#img_logo {
+    width: 90vw;
+    max-width: 300px;
+    cursor: pointer;
 }
 
 /* home */
@@ -17,6 +23,7 @@ div.popular_div {
     display: flex;
     flex-direction: column;
     text-align: center;
+    margin-top: 5%;
 }
 
 div.popular_div>h2 {
@@ -51,7 +58,7 @@ nav {
 #burger {
     width: 30px;
     height: 2px;
-    background: black;
+    background: #e9e9e9;
     display: inline-block;
     position: relative;
 }
@@ -61,7 +68,7 @@ nav {
     content: '';
     width: 30px;
     height: 2px;
-    background: black;
+    background: #e9e9e9;
     display: inline-block;
     position: absolute;
     transform-origin: center;
@@ -92,6 +99,7 @@ nav {
 
 #burger_div {
     float: right;
+    height: 30px;
 }
 
 ul.list-menu {
@@ -105,5 +113,5 @@ ul.list-menu.open {
     top: 30px;
     width: 40%;
     padding: 5%;
-    background-color: aliceblue;
+    background-color: #e9e9e9;
 }

@@ -1,14 +1,15 @@
 <header>
-    <h1>CINETECH</h1>
+    <img src="/cinetech/public/img/cinetech.png" alt="logo" id="img_logo">
     <nav>
-        <div id="burger_div">
-            <a id="link" href=""><span id="burger"></span></a>
-        </div>
+        <a id="link" href="">
+            <div id="burger_div">
+                <span id="burger"></span>
+            </div>
+        </a>
         <ul class="list-menu">
             <li><a href="auth" id="auth">Se connecter</a></li>
             <li><a href="movies" id="movies">Films</a></li>
             <li><a href="tvs" id="tvs">Series</a></li>
         </ul>
-        </div>
     </nav>
 </header>
