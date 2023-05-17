@@ -7,9 +7,9 @@
             </div>
         </a>
         <ul class="list-menu">
-            <li><a href="auth" id="auth">Se connecter</a></li>
-            <li><a href="movies" id="movies">Films</a></li>
-            <li><a href="tvs" id="tvs">Series</a></li>
+            <li><a href="/cinetech/auth" id="auth">Se connecter</a></li>
+            <li><a href="/cinetech/movies" id="movies">Films</a></li>
+            <li><a href="/cinetech/tvs" id="tvs">Series</a></li>
         </ul>
     </nav>
 </header>

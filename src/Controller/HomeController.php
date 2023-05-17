@@ -11,4 +11,8 @@ class HomeController
     function getMovies() {
         require_once('src/View/movies.php');
     }
+
+    function getTvs() {
+        require_once('src/View/tvs.php');
+    }
 }

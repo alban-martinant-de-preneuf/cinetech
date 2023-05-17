@@ -1,6 +1,7 @@
  <?php
 
  use App\Controller\HomeController;
+ use App\Controller\MovieController;
 
   require_once 'vendor/autoload.php';
 
@@ -17,6 +18,17 @@
     $homeController = new HomeController();
     $homeController->getMovies();
   });
+
+  // $router->map('GET', '/tvs', function () {
+  //   $homeController = new HomeController();
+  //   $homeController->getTvs();
+  // });
+
+  $router->map('GET', '/movies/[i:id]', function ($id) {
+    $movieController = new MovieController();
+    $movieController->getMovie($id);
+  });
+  
 
   // match current request url
   $match = $router->match();
