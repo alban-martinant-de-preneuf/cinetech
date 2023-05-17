@@ -13,11 +13,13 @@ function displayContent() {
         moviesDiv.innerHTML = '<h2>Films</h2>';
         for (let film of items) {
             moviesDiv.innerHTML += (`
-                <div class="item_div">
-                    <div class="image_container">
-                        <img src="https://image.tmdb.org/t/p/w342/${film.poster_path}">
+                <a href="/cinetech/movies/${film.id}">
+                    <div class="item_div">
+                        <div class="image_container">
+                            <img src="https://image.tmdb.org/t/p/w342/${film.poster_path}">
+                        </div>
                     </div>
-                </div>
+                </a>
             `)
         }
     })
