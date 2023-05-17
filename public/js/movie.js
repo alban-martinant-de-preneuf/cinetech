@@ -5,19 +5,20 @@ async function getData(url) {
 }
 
 async function displayContent() {
-    movieDiv = (document.createElement('div'));
-    movieDiv.classList.add('movie_div');
-
     const currentURI = window.location.pathname;
     const parts = currentURI.split('/');
     const idMovie = parts.pop();
-
+    
     const movie = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "?language=fr-FR");
     const credits = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "/credits?language=fr-FR");
     console.log(credits)
     console.log(movie)
 
+    movieDiv = (document.createElement('div'));
+    movieDiv.classList.add('movie_div');
+
     const genres = movie.genres.map(genre => genre.name).join(', ');
+
     movieDiv.innerHTML = (
         `<div class="details_div">
                 <div class="image_container">
@@ -34,7 +35,27 @@ async function displayContent() {
             </div>`
     );
 
+    const reco = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "/recommendations?language=fr-FR");
+
+    recoDiv = (document.createElement('div'));
+    recoDiv.classList.add('reco_div');
+    console.log(reco)
+
+    recoDiv.innerHTML = `<h2>Recommandations</h2>`;
+    reco.results.forEach(movie => {
+        if (movie.poster_path == null) {
+        recoDiv.innerHTML += (
+            `<div class="reco_movie">
+                <a href="/movie/${movie.id}">
+                    <img src="https://image.tmdb.org/t/p/w342/${movie.poster_path}">
+                </a>
+            </div>`
+        )
+        }
+    })
+
     mainContainer.appendChild(movieDiv)
+    mainContainer.appendChild(recoDiv)
 
 }
 
