@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/cinetech/public/css/style.css">
     <title>Cinetech</title>
     <script src="/cinetech/public/js/header.js" defer></script>
-    <script src="/cinetech/public/js/details.js" defer></script>
+    <script src="/cinetech/public/js/movie.js" defer></script>
 </head>
 <body>
     <?php require_once('includes/header.php'); ?>

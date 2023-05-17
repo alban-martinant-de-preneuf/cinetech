@@ -8,8 +8,10 @@ function displayContent() {
     moviesDiv = (document.createElement('div'));
     moviesDiv.classList.add('movies_div');
 
-    getData("https://api.themoviedb.org/3/discover/movie?language=fr-FR&page=1&sort_by=popularity.desc").then(items => {
-        moviesDiv.innerHTML = '<h2>Films</h2>';
+    getData("https://api.themoviedb.org/3/discover/tv?language=fr-FR&page=1&sort_by=popularity.desc").then(items => {
+        console.log(items)
+        console.log('series')
+        moviesDiv.innerHTML = '<h2>Series</h2>';
         for (let film of items) {
             moviesDiv.innerHTML += (`
                 <a href="/cinetech/movies/${film.id}">

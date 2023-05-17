@@ -4,7 +4,11 @@ namespace App\Controller;
 
 class MovieController
 {
-    function getMovie($id) {
-        require_once('src/View/details.php');
+    function getMovie() {
+        require_once('src/View/movie.php');
+    }
+
+    function getTv() {
+        require_once('src/View/tv.php');
     }
 }

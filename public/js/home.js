@@ -14,9 +14,11 @@ function displayContent() {
             console.log(items[i])
             trendingMoviesDiv.innerHTML += (`
                 <div class="item_div">
-                    <div class="image_container">
-                        <img src="https://image.tmdb.org/t/p/w342/${items[i].poster_path}">
-                    </div>
+                    <a href="/cinetech/movies/${items[i].id}">
+                        <div class="image_container">
+                            <img src="https://image.tmdb.org/t/p/w342/${items[i].poster_path}">
+                        </div>
+                    </a>
                 </div>
             `)
         }
@@ -32,9 +34,11 @@ function displayContent() {
             console.log(items[i])
             trendingTvDiv.innerHTML += (`
                 <div class="item_div">
-                    <div class="image_container">
-                        <img src="https://image.tmdb.org/t/p/w342/${items[i].poster_path}">
-                    </div>
+                    <a href="/cinetech/tvs/${items[i].id}">
+                        <div class="image_container">
+                            <img src="https://image.tmdb.org/t/p/w342/${items[i].poster_path}">
+                        </div>
+                    </a>
                 </div>
             `)
         }
