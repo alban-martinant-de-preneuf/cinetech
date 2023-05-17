@@ -17,6 +17,20 @@ header .top{
     cursor: pointer;
 }
 
+/* search */
+
+div .bottom {
+    position: relative;
+}
+
+div#search_results {
+    position: absolute;
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    background-color: blanchedalmond;
+}
+
 /* home */
 
 div.popular_div {

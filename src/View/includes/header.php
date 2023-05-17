@@ -17,5 +17,6 @@
     <div class="bottom">
         <label for="search">Rechercher : </label>
         <input type="text" name="search" id="search">
+        <div id="search_results"></div>
     </div>
 </header>

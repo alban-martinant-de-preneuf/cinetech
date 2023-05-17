@@ -43,11 +43,11 @@ async function displayContent() {
 
     recoDiv.innerHTML = `<h2>Recommandations</h2>`;
     reco.results.forEach(movie => {
-        if (movie.poster_path == null) {
+        if (movie.poster_path !== null) {
         recoDiv.innerHTML += (
             `<div class="reco_movie">
-                <a href="/movie/${movie.id}">
-                    <img src="https://image.tmdb.org/t/p/w342/${movie.poster_path}">
+                <a href="/cinetech/movies/${movie.id}">
+                    <img src="https://image.tmdb.org/t/p/w154/${movie.poster_path}">
                 </a>
             </div>`
         )
