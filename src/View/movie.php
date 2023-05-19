@@ -8,12 +8,14 @@
     <link rel="stylesheet" href="/cinetech/public/css/style.css">
     <title>Cinetech</title>
     <script src="/cinetech/public/js/header.js" defer></script>
-    <script src="/cinetech/public/js/movie.js" defer></script>
+    <script type="module" src="/cinetech/public/js/movie.js" defer></script>
 </head>
 <body>
     <?php require_once('includes/header.php'); ?>
 
-    <div id="main_container"></div>
+    <main>
+        <div id="main_container"></div>
+    </main>
     
 </body>
 </html>

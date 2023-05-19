@@ -1,11 +1,13 @@
+import { options } from "./module.js";
+
 async function getData(url) {
-    const response = await fetch(url, options)
+    const response = await fetch(url, options())
     const populars = await response.json();
     return populars.results
 }
 
 function displayContent() {
-    trendingMoviesDiv = (document.createElement('div'));
+    const trendingMoviesDiv = (document.createElement('div'));
     trendingMoviesDiv.classList.add('popular_div');
 
     getData('https://api.themoviedb.org/3/trending/movie/day?language=fr-FR&page=1').then(items => {
@@ -25,7 +27,7 @@ function displayContent() {
     })
     mainContainer.appendChild(trendingMoviesDiv)
 
-    trendingTvDiv = (document.createElement('div'));
+    const trendingTvDiv = (document.createElement('div'));
     trendingTvDiv.classList.add('popular_div');
 
     getData('https://api.themoviedb.org/3/trending/tv/day?language=fr-FR&page=1').then(items => {
@@ -47,13 +49,5 @@ function displayContent() {
 }
 
 const mainContainer = document.getElementById('main_container');
-
-const options = {
-    method: 'GET',
-    headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1OTI3ZmY0Yzg0Njk4MTM2YTAzYzJjYjVkMmUzNDliMyIsInN1YiI6IjY0NjFlZDhhZWY4YjMyMDExYjE0N2NlYSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pLIoyG8msCcMdFu39dLleYXaU7cMkM4hUX-ndF_Cli4'
-    }
-};
 
 displayContent();
