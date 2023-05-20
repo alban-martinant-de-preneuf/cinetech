@@ -7,20 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/cinetech/public/css/reset.css">
     <link rel="stylesheet" href="/cinetech/public/css/style.css">
-    <title>Cinetech</title>
+    <title>Les series</title>
     <script src="/cinetech/public/js/header.js" defer></script>
-    <script src="/cinetech/public/js/tvs.js" defer></script>
+    <script type="modules" src="/cinetech/public/js/tvs.js" defer></script>
 </head>
 
 <body>
     <?php require_once('includes/header.php'); ?>
 
-    <div id="main_container">
-        <main>
-            <h1>Les series</h1>
-            <div id="main_container"></div>
-        </main>
-    </div>
+    <main>
+        <h1>Les series</h1>
+        <div id="main_container"></div>
+    </main>
 
 </body>
 
