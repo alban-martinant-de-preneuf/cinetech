@@ -13,7 +13,7 @@ main {
 
 /* header */
 
-header {
+header .top{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -45,6 +45,19 @@ div.form_connection {
     right: 0;
     padding: 5%;
     cursor: pointer;
+  
+/* search */
+
+div .bottom {
+    position: relative;
+}
+
+div#search_results {
+    position: absolute;
+    /* top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    background-color: blanchedalmond;
 }
 
 /* home */
