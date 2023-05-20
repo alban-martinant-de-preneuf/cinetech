@@ -13,7 +13,7 @@
 <body>
     <?php require_once('includes/header.php'); ?>
 
-    <main>
+    <main class="test">
         <div id="main_container"></div>
     </main>
     

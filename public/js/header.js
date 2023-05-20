@@ -2,7 +2,7 @@ const link = document.getElementById('link')
 const burger = document.getElementById('burger')
 const ul = document.querySelector('ul')
 // const title = document.getElementById('img_logo');
-const main = document.querySelector('main'); 
+const main = document.querySelector('main');
 
 // title.addEventListener('click', (e) => {
 //   window.location = '/cinetech';
@@ -17,49 +17,114 @@ link.addEventListener('click', (e) => {
 const authButton = document.getElementById('auth');
 
 function formLogIn() {
-  return (
-    `<div class="form_connection">
-      <div class="close">
-        <button id="close">X</button>
-      </div>
-      <form action="/cinetech/login" method="POST">
-        <input type="text" name="username" placeholder="Nom d'utilisateur">
-        <input type="password" name="password" placeholder="Mot de passe">
-        <button type="submit">Se connecter</button>
-      </form>
-      <p>Pas encore de compte ? <button id="sign_in">S'inscrire</a></button>
-    </div>`
+  const form = document.createElement('div');
+  form.id = 'form_connection';
+  form.innerHTML = (
+    `<div class="window_title">
+      <h4>Se connecter</h4>      
+      <button id="close">X</button>
+      <hr>
+    </div>
+    <div id="error"></div>
+    <form id=log_in_form>
+      <input type="text" name="email" placeholder="E-mail utilisateur">
+      <input type="password" name="password" placeholder="Mot de passe">
+      <button type="submit">Se connecter</button>
+    </form>
+    <p>Pas encore de compte ? <button id="sign_in">S'inscrire</a></button>`
   )
+  return form;
 }
 
 function formSignIn() {
-  return (
-    `<div class="form_connection">
-    <div class="close">
+  const form = document.createElement('div');
+  form.id = 'form_connection';
+  form.innerHTML = (
+    `<div class="window_title">
+      <h4>Se connecter</h4>      
       <button id="close">X</button>
+      <hr>
     </div>
-    <form action="/cinetech/signin" method="POST">
-        <input type="text" name="username" placeholder="Nom d'utilisateur">
+    <div id="error"></div>
+      <form id="sign_in_form" action="/cinetech/signin" method="POST">
+        <input type="text" name="email" placeholder="E-mail utilisateur">
+        <input type="text" name="firstname" placeholder="Prénom">
+        <input type="text" name="lastname" placeholder="Nom">
         <input type="password" name="password" placeholder="Mot de passe">
         <input type="password" name="password2" placeholder="Confirmer le mot de passe">
         <button type="submit">S'inscrire</button>
-    </form>
-      <p>Déjà un compte ? <button id="sign_in">Se connecter</a></button>
+      </form>
+        <p>Déjà un compte ? <button id="sign_in">Se connecter</a></button>
     </div>`
   )
+  return form;
 }
+
+function displayLogInForm() {
+
+  document.body.appendChild(formLogIn());
+  const close = document.getElementById('close');
+  const signInButton = document.getElementById('sign_in');
+  const logInForm = document.getElementById('log_in_form');
+
+  close.addEventListener('click', () => {
+    main.classList.toggle('blur');
+    document.querySelector('#form_connection').remove();
+  })
+
+  signInButton.addEventListener('click', () => {
+    document.querySelector('#form_connection').remove();
+    document.body.appendChild(formSignIn());
+    const signInForm = document.getElementById('sign_in_form');
+    signInForm.addEventListener('submit', submitSignInForm);
+  })
+
+  logInForm.addEventListener('submit', submitLogInForm);
+}
+
+function submitLogInForm(e) {
+  e.preventDefault();
+  const data = new FormData(e.target);
+  fetch('/cinetech/login', {
+    method: 'POST',
+    body: data
+  })
+    .then(response => {
+      if (response.status === 200) {
+        window.location = '/cinetech';
+      } else {
+        console.log(response.statusText);
+        const error = document.getElementById('error');
+        error.innerHTML = response.statusText;
+      }
+    })
+}
+
+function submitSignInForm(e) {
+  e.preventDefault();
+  console.log(e.target);
+  const data = new FormData(e.target);
+  fetch('/cinetech/register', {
+    method: 'POST',
+    body: data
+  })
+    .then(response => {
+      if (response.status === 200) {
+        document.querySelector('#form_connection').remove();
+        displayLogInForm();
+      } else {
+        console.log(response.statusText);
+        const error = document.getElementById('error');
+        error.innerHTML = response.statusText;
+      }
+    })
+}
+
 
 authButton.addEventListener('click', (e) => {
   e.preventDefault();
   burger.classList.toggle('open');
   ul.classList.toggle('open');
   main.classList.toggle('blur');
-  document.body.innerHTML += formLogIn();
-  const close = document.getElementById('close');
-  const signIn = document.getElementById('sign_in');
-
-  close.addEventListener('click', (e) => {
-    document.querySelector('.form_connection').remove();
-    main.classList.toggle('blur');
-  })
+  displayLogInForm();
 })

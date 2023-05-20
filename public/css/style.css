@@ -27,7 +27,7 @@ header {
 
 /* connection */
 
-div.form_connection {
+div#form_connection {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -39,12 +39,15 @@ div.form_connection {
     border-radius: 2%;
 }
 
-.close {
+div#error {
+    color: red;
+}
+
+#close {
     position: absolute;
     top: 0;
     right: 0;
-    padding: 5%;
-    cursor: pointer;
+    margin: 2%
 }
 
 /* home */

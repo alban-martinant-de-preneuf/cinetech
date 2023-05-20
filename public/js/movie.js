@@ -7,7 +7,7 @@ async function getData(url) {
 }
 
 async function displayContent() {
-    movieDiv = (document.createElement('div'));
+    const movieDiv = (document.createElement('div'));
     movieDiv.classList.add('movie_div');
 
     const currentURI = window.location.pathname;
