@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/cinetech/public/css/reset.css">
     <link rel="stylesheet" href="/cinetech/public/css/style.css">
     <title>Les series</title>
-    <script type="modules" src="/cinetech/public/js/tvs.js"></script>
+    <script type="module" src="/cinetech/public/js/tvs.js"></script>
     <script type="module" src="/cinetech/public/js/header.js"></script>
 </head>
 
