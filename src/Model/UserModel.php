@@ -65,4 +65,29 @@ class UserModel
         return $favorites;
     }
 
+    public function getFavoriteId($userId) {
+        $db = DbConnection::getDb();
+        $sql_request = ("SELECT id_fav FROM favorite
+            WHERE id_user = :id"
+        );
+        $statement = $db->prepare($sql_request);
+        $statement->execute([
+            ':id' => $userId
+        ]);
+        $favId = $statement->fetch(\PDO ::FETCH_COLUMN);
+        return $favId;
+    }
+
+    public function addFavoriteMovie($favId, $movieId) {
+        $db = DbConnection::getDb();
+        $sql_request = ("INSERT INTO favorite_movie (id_fav, id_mov)
+            VALUES (:id_fav, :id_mov)"
+        );
+        $statement = $db->prepare($sql_request);
+        $statement->execute([
+            ':id_fav' => $favId,
+            ':id_mov' => $movieId
+        ]);
+    }
+
 }

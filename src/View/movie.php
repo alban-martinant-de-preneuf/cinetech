@@ -15,8 +15,6 @@
 
     <main>
         <div id="main_container"></div>
-        <button id="addToFavorite">Ajouter aux favories</button>
-        <button id="addComment">Commenter</button>
     </main>
     
 </body>

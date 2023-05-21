@@ -64,6 +64,11 @@
     $userController->getFavorites();
   });
 
+  $router->map('GET', '/favorites/addMovie/[i:id]', function ($id) {
+    $userController = new UserController();
+    $userController->addFavoriteMovie($id);
+  });
+
 
   // match current request url
   $match = $router->match();

@@ -12,8 +12,6 @@ link.addEventListener('click', (e) => {
   ul.classList.toggle('open');
 })
 
-const authButton = document.getElementById('auth');
-
 function formLogIn() {
   const form = document.createElement('div');
   form.id = 'form_connection';

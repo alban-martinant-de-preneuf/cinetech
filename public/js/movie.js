@@ -1,13 +1,18 @@
 import { getData } from "./modules/module.js";
 
+function getId() {
+    const currentURI = window.location.pathname;
+    const parts = currentURI.split('/');
+    const idMovie = parts.pop();
+    return idMovie
+}
+
 async function displayContent() {
     const movieDiv = (document.createElement('div'));
     movieDiv.classList.add('movie_div');
 
-    const currentURI = window.location.pathname;
-    const parts = currentURI.split('/');
-    const idMovie = parts.pop();
-    
+    const idMovie = getId();
+
     const movie = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "?language=fr-FR");
     const credits = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "/credits?language=fr-FR");
 
@@ -15,18 +20,20 @@ async function displayContent() {
 
     movieDiv.innerHTML = (
         `<div class="details_div">
-                <div class="image_container">
-                    <img src="https://image.tmdb.org/t/p/w342/${movie.poster_path}">
-                </div>
-                <div class="movie_details">
-                    <p>Genre(s) : ${genres}</p>
-                    <p>Avec : ${credits.cast.slice(0, 5).map(actor => actor.name).join(', ')}</p>
-                    <h2>${movie.title}</h2>
-                    <h5>${movie.tagline}</h5>
-                    <p>${movie.overview}</p>
-                    <p>note : ${movie.vote_average.toFixed(1)}/10</p>
-                </div>
-            </div>`
+            <div class="image_container">
+                <img src="https://image.tmdb.org/t/p/w342/${movie.poster_path}">
+            </div>
+            <div class="movie_details">
+                <p>Genre(s) : ${genres}</p>
+                <p>Avec : ${credits.cast.slice(0, 5).map(actor => actor.name).join(', ')}</p>
+                <h2>${movie.title}</h2>
+                <h5>${movie.tagline}</h5>
+                <p>${movie.overview}</p>
+                <p>note : ${movie.vote_average.toFixed(1)}/10</p>
+            </div>
+            <button id="addToFavorite">Ajouter aux favories</button>
+            <button id="addComment">Commenter</button>
+        </div>`
     );
 
     const reco = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "/recommendations?language=fr-FR");
@@ -38,13 +45,13 @@ async function displayContent() {
     recoDiv.innerHTML = `<h2>Recommandations</h2>`;
     reco.results.forEach(movie => {
         if (movie.poster_path !== null) {
-        recoDiv.innerHTML += (
-            `<div class="reco_movie">
+            recoDiv.innerHTML += (
+                `<div class="reco_movie">
                 <a href="/cinetech/movies/${movie.id}">
                     <img src="https://image.tmdb.org/t/p/w154/${movie.poster_path}">
                 </a>
             </div>`
-        )
+            )
         }
     })
 
@@ -55,4 +62,21 @@ async function displayContent() {
 
 const mainContainer = document.getElementById('main_container');
 
-displayContent();
+function activateAddToFavorite() {
+    const addToFavorite = document.getElementById('addToFavorite');
+    addToFavorite.addEventListener('click', () => {
+        const idMovie = getId();
+        fetch('/cinetech/favorites/addMovie/' + idMovie)
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    console.error(response.status);
+                }
+            })
+    })
+}
+
+displayContent()
+    .then(() => activateAddToFavorite())
+    .then(() => activateAddComment());
