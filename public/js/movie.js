@@ -7,6 +7,9 @@ async function getData(url) {
 }
 
 async function displayContent() {
+    const movieDiv = (document.createElement('div'));
+    movieDiv.classList.add('movie_div');
+
     const currentURI = window.location.pathname;
     const parts = currentURI.split('/');
     const idMovie = parts.pop();

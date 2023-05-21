@@ -1,7 +1,8 @@
  <?php
 
- use App\Controller\HomeController;
- use App\Controller\MovieController;
+  use App\Controller\HomeController;
+  use App\Controller\MovieController;
+  use App\Controller\AuthController;
 
   require_once 'vendor/autoload.php';
 
@@ -33,7 +34,18 @@
     $movieController = new MovieController();
     $movieController->getTv();
   });
-  
+
+  $router->map('POST', '/login', function () {
+    $authController = new AuthController();
+    $authController->login($_POST['email'], $_POST['password']);
+  });
+
+  $router->map('POST', '/register', function () {
+    $authController = new AuthController();
+    var_dump($_POST);
+    $authController->register($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password'], $_POST['password2']);
+  });
+
 
   // match current request url
   $match = $router->match();

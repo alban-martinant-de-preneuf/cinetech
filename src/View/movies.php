@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="/cinetech/public/css/reset.css">
     <link rel="stylesheet" href="/cinetech/public/css/style.css">
     <title>Les films</title>
+    <script type="module" src="/cinetech/public/js/movies.js"></script>
     <script src="/cinetech/public/js/header.js" defer></script>
-    <script type="module" src="/cinetech/public/js/movies.js" defer></script>
 </head>
 
 <body>

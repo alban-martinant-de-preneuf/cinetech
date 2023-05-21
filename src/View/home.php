@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="/cinetech/public/css/reset.css">
     <link rel="stylesheet" href="/cinetech/public/css/style.css">
     <title>Cinetech</title>
-    <script src="/cinetech/public/js/header.js" defer></script>
-    <script type="module" src="/cinetech/public/js/home.js" defer></script>
+    <script type="module" src="/cinetech/public/js/home.js"></script>
+    <script type="module" src="/cinetech/public/js/header.js"></script>
 </head>
 <body>
     <?php require_once('includes/header.php'); ?>
 
-    <main>
+    <main class="test">
         <div id="main_container"></div>
     </main>
     
