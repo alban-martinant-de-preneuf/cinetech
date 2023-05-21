@@ -4,6 +4,8 @@
   use App\Controller\MovieController;
   use App\Controller\AuthController;
 
+  session_start();
+
   require_once 'vendor/autoload.php';
 
   $router = new AltoRouter();
@@ -44,6 +46,16 @@
     $authController = new AuthController();
     var_dump($_POST);
     $authController->register($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password'], $_POST['password2']);
+  });
+
+  $router->map('GET', '/logout', function () {
+    session_destroy();
+    header('Location: /cinetech');
+  });
+
+  $router->map('GET', '/favorites', function () {
+    $movieController = new MovieController();
+    $movieController->getFavorites();
   });
 
 

@@ -31,7 +31,7 @@ class UserModel
         $statement->execute([
             ':email' => $email
         ]);
-        $user = $statement->fetch();
+        $user = $statement->fetch(\PDO ::FETCH_ASSOC);
         return $user;
     }
 

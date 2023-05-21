@@ -10,7 +10,13 @@
                 </div>
             </a>
             <ul class="list-menu">
-                <li><a href="" id="auth">Se connecter</a></li>
+                <?php if (isset($_SESSION['user'])) : ?>
+                    <li><a href="/cinetech/profile" id="profile">Profil</a></li>
+                    <li><a href="/cinetech/favorites" id="logout">Mes favories</a></li>
+                    <li><a href="/cinetech/logout" id="logout">Se déconnecter</a></li>
+                <?php else : ?>
+                    <li><a href="" id="auth">Se connecter</a></li>
+                <?php endif; ?>
                 <li><a href="/cinetech/movies" id="movies">Films</a></li>
                 <li><a href="/cinetech/tvs" id="tvs">Series</a></li>
             </ul>

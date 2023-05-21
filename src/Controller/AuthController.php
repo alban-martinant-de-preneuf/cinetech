@@ -32,6 +32,7 @@ class AuthController
         $user = $userModel->getUser($email);
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user'] = $user;
+            var_dump($_SESSION['user']);
             header("HTTP/1.1 200 OK");
             die();
         } else {

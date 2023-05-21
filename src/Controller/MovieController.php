@@ -11,4 +11,8 @@ class MovieController
     function getTv() {
         require_once('src/View/tv.php');
     }
+
+    function getFavorites() {
+        require_once('src/View/favorites.php');
+    }
 }
