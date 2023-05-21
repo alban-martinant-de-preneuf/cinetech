@@ -52,27 +52,33 @@ function formSignIn() {
         <input type="password" name="password2" placeholder="Confirmer le mot de passe">
         <button type="submit">S'inscrire</button>
       </form>
-        <p>Déjà un compte ? <button id="sign_in">Se connecter</a></button>
+        <p>Déjà un compte ? <button id="log_in">Se connecter</a></button>
     </div>`
   )
   return form;
 }
 
-function displayLogInForm() {
-
-  document.body.appendChild(formLogIn());
+function activateCloseButton() {
   const close = document.getElementById('close');
-  const signInButton = document.getElementById('sign_in');
-  const logInForm = document.getElementById('log_in_form');
-
   close.addEventListener('click', () => {
     main.classList.toggle('blur');
     document.querySelector('#form_connection').remove();
   })
+}
+
+function displayLogInForm() {
+  document.querySelector('#form_connection')?.remove();
+  document.body.appendChild(formLogIn());
+  const signInButton = document.getElementById('sign_in');
+  const logInForm = document.getElementById('log_in_form');
+  activateCloseButton();
 
   signInButton.addEventListener('click', () => {
     document.querySelector('#form_connection').remove();
     document.body.appendChild(formSignIn());
+    activateCloseButton();
+    document.getElementById('log_in').addEventListener('click', displayLogInForm);
+
     const signInForm = document.getElementById('sign_in_form');
     signInForm.addEventListener('submit', submitSignInForm);
   })
