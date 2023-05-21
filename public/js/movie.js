@@ -1,10 +1,4 @@
-import { options } from "./module.js";
-
-async function getData(url) {
-    const response = await fetch(url, options());
-    const result = await response.json();
-    return result;
-}
+import { getData } from "./modules/module.js";
 
 async function displayContent() {
     const movieDiv = (document.createElement('div'));
@@ -18,9 +12,6 @@ async function displayContent() {
     const credits = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "/credits?language=fr-FR");
     console.log(credits)
     console.log(movie)
-
-    movieDiv = (document.createElement('div'));
-    movieDiv.classList.add('movie_div');
 
     const genres = movie.genres.map(genre => genre.name).join(', ');
 
@@ -42,7 +33,7 @@ async function displayContent() {
 
     const reco = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "/recommendations?language=fr-FR");
 
-    recoDiv = (document.createElement('div'));
+    const recoDiv = (document.createElement('div'));
     recoDiv.classList.add('reco_div');
     console.log(reco)
 
@@ -63,8 +54,6 @@ async function displayContent() {
     mainContainer.appendChild(recoDiv)
 
 }
-
-
 
 const mainContainer = document.getElementById('main_container');
 

@@ -1,16 +1,11 @@
-import { options } from "./module.js";
-
-async function getData(url) {
-    const response = await fetch(url, options());
-    const result = await response.json();
-    return result.results;
-}
+import { getData } from "./modules/module.js";
 
 function displayContent() {
     const moviesDiv = (document.createElement('div'));
     moviesDiv.classList.add('movies_div');
 
-    getData("https://api.themoviedb.org/3/discover/movie?language=fr-FR&page=1&sort_by=popularity.desc").then(items => {
+    getData("https://api.themoviedb.org/3/discover/movie?language=fr-FR&page=1&sort_by=popularity.desc").then(result => {
+        const items = result.results;
         for (let film of items) {
             moviesDiv.innerHTML += (`
             <div class="item_div">

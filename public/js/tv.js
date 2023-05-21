@@ -1,8 +1,4 @@
-async function getData(url) {
-    const response = await fetch(url, options);
-    const result = await response.json();
-    return result;
-}
+import { getData } from "./modules/module.js";
 
 function displayContent() {
     movieDiv = (document.createElement('div'));
