@@ -3,6 +3,7 @@
   use App\Controller\HomeController;
   use App\Controller\MovieController;
   use App\Controller\AuthController;
+  use App\Controller\UserController;
 
   session_start();
 
@@ -24,7 +25,7 @@
 
   $router->map('GET', '/movies/[i:id]', function ($id) {
     $movieController = new MovieController();
-    $movieController->getMovie();
+    $movieController->pageMovie();
   });
 
   $router->map('GET', '/tvs', function () {
@@ -34,7 +35,7 @@
 
   $router->map('GET', '/tvs/[i:id]', function ($id) {
     $movieController = new MovieController();
-    $movieController->getTv();
+    $movieController->pageTv();
   });
 
   $router->map('POST', '/login', function () {
@@ -55,7 +56,12 @@
 
   $router->map('GET', '/favorites', function () {
     $movieController = new MovieController();
-    $movieController->getFavorites();
+    $movieController->pageFavorites();
+  });
+
+  $router->map('GET', '/favoritesList', function () {
+    $userController = new UserController();
+    $userController->getFavorites();
   });
 
 

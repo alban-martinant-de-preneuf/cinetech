@@ -14,7 +14,12 @@
     <?php require_once('includes/header.php'); ?>
 
     <main>
-        <div id="main_container"></div>
+        <?php if (isset($_SESSION['user'])): ?>
+            <div id="main_container"></div>
+        <?php else : ?>
+            <?php header('Location: /cinetech'); ?>
+        <?php endif; ?>
+
     </main>
     
 </body>

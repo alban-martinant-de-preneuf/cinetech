@@ -124,8 +124,7 @@ function submitSignInForm(e) {
     })
 }
 
-
-authButton.addEventListener('click', (e) => {
+document.getElementById('auth')?.addEventListener('click', (e) => {
   e.preventDefault();
   burger.classList.toggle('open');
   ul.classList.toggle('open');
