@@ -12,7 +12,7 @@ async function displayContent() {
     const credits = await getData("https://api.themoviedb.org/3/tv/" + idTv + "/credits?language=fr-FR");
 
     const genres = tv.genres.map(genre => genre.name).join(', ');
-    
+
     movieDiv.innerHTML = (
         `<div class="details_div">
             <div class="image_container">
