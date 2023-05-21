@@ -10,8 +10,6 @@ async function displayContent() {
     
     const movie = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "?language=fr-FR");
     const credits = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "/credits?language=fr-FR");
-    console.log(credits)
-    console.log(movie)
 
     const genres = movie.genres.map(genre => genre.name).join(', ');
 

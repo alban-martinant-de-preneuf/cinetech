@@ -20,14 +20,14 @@
     $homeController->getMovies();
   });
 
-  $router->map('GET', '/tvs', function () {
-    $homeController = new HomeController();
-    $homeController->getTvs();
-  });
-
   $router->map('GET', '/movies/[i:id]', function ($id) {
     $movieController = new MovieController();
     $movieController->getMovie();
+  });
+
+  $router->map('GET', '/tvs', function () {
+    $homeController = new HomeController();
+    $homeController->getTvs();
   });
 
   $router->map('GET', '/tvs/[i:id]', function ($id) {
