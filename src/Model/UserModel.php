@@ -102,4 +102,30 @@ class UserModel
         ]);
     }
 
+    public function addFavoriteTv($favId, $id)
+    {
+        $db = DbConnection::getDb();
+        $sql_request = ("INSERT INTO favorite_tv (id_fav, id_tv)
+            VALUES (:id_fav, :id_tv)"
+        );
+        $statement = $db->prepare($sql_request);
+        $statement->execute([
+            ':id_fav' => $favId,
+            ':id_tv' => $id
+        ]);
+    }
+
+    public function removeFavoriteTv($favId, $id)
+    {
+        $db = DbConnection::getDb();
+        $sql_request = ("DELETE FROM favorite_tv
+            WHERE id_fav = :id_fav AND id_tv = :id_tv"
+        );
+        $statement = $db->prepare($sql_request);
+        $statement->execute([
+            ':id_fav' => $favId,
+            ':id_tv' => $id
+        ]);
+    }
+
 }

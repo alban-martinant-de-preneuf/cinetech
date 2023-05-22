@@ -33,7 +33,7 @@ async function displayMovie() {
     );
 }
 
-async function activateRemoveFavorite(favoriteBtn) {
+function activateRemoveFavorite(favoriteBtn) {
     favoriteBtn?.addEventListener('click', () => {
         fetch('/cinetech/favorites/removemovie/' + idMovie)
             .then(response => {
@@ -46,7 +46,7 @@ async function activateRemoveFavorite(favoriteBtn) {
     })
 }
 
-async function activateAddToFavorite(favoriteBtn) {
+function activateAddToFavorite(favoriteBtn) {
     favoriteBtn?.addEventListener('click', () => {
         fetch('/cinetech/favorites/addMovie/' + idMovie)
             .then(response => {
