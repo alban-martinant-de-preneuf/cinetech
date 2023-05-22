@@ -9,6 +9,14 @@ class AuthController
 
     public function register($firstname, $lastname, $email, $password, $password2)
     {
+        $args = func_get_args();
+        foreach ($args as $arg) {
+            if (empty($arg)) {
+                header("HTTP/1.1 400 Empty field");
+                die();
+            }
+            $arg = htmlspecialchars($arg);
+        }
         $userModel = new UserModel();
         if ($password !== $password2) {
             header("HTTP/1.1 400 Passwords don't match");
@@ -28,6 +36,14 @@ class AuthController
 
     public function login($email, $password)
     {
+        $args = func_get_args();
+        foreach ($args as $arg) {
+            if (empty($arg)) {
+                header("HTTP/1.1 400 Empty field");
+                die();
+            }
+            $arg = htmlspecialchars($arg);
+        }
         $userModel = new UserModel();
         $user = $userModel->getUser($email);
         if ($user && password_verify($password, $user['password'])) {

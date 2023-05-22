@@ -4,6 +4,7 @@
   use App\Controller\MovieController;
   use App\Controller\AuthController;
   use App\Controller\UserController;
+  use App\Controller\CommentController;
 
   session_start();
 
@@ -26,6 +27,12 @@
   $router->map('GET', '/movies/[i:id]', function ($id) {
     $movieController = new MovieController();
     $movieController->pageMovie();
+  });
+
+  $router->map('POST', '/movies/addcomment/[i:id]', function ($id) {
+    $comment = json_decode(file_get_contents('php://input'), true)['comment'];
+    $commentController = new CommentController();
+    $commentController->addMovieComment($id, $comment);
   });
 
   $router->map('GET', '/tvs', function () {

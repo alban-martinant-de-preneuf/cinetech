@@ -8,8 +8,7 @@ function getId() {
 }
 
 async function displayContent() {
-    const movieDiv = (document.createElement('div'));
-    movieDiv.classList.add('movie_div');
+    const movieDiv = document.getElementById('movie_div')
 
     const idMovie = getId();
 
@@ -31,10 +30,17 @@ async function displayContent() {
                 <p>${movie.overview}</p>
                 <p>note : ${movie.vote_average.toFixed(1)}/10</p>
             </div>
-            <button id="addToFavorite">Ajouter aux favories</button>
-            <button id="addComment">Commenter</button>
         </div>`
     );
+
+    const movieBtnsDiv = document.getElementById('movie_btns');
+
+    // if (movieBtnsDiv) {
+    //     movieBtnsDiv.innerHTML = (
+    //         `<button id="addToFavorite">Ajouter aux favories</button>
+    //         <button id="addComment">Commenter</button>`
+    //     );
+    // }
 
     const reco = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "/recommendations?language=fr-FR");
 
@@ -47,24 +53,22 @@ async function displayContent() {
         if (movie.poster_path !== null) {
             recoDiv.innerHTML += (
                 `<div class="reco_movie">
-                <a href="/cinetech/movies/${movie.id}">
-                    <img src="https://image.tmdb.org/t/p/w154/${movie.poster_path}">
-                </a>
-            </div>`
+                    <a href="/cinetech/movies/${movie.id}">
+                        <img src="https://image.tmdb.org/t/p/w154/${movie.poster_path}">
+                    </a>
+                </div>`
             )
         }
     })
 
-    mainContainer.appendChild(movieDiv)
-    mainContainer.appendChild(recoDiv)
 
 }
 
-const mainContainer = document.getElementById('main_container');
+// const mainContainer = document.getElementById('main_container');
 
 function activateAddToFavorite() {
     const addToFavorite = document.getElementById('addToFavorite');
-    addToFavorite.addEventListener('click', () => {
+    addToFavorite?.addEventListener('click', () => {
         const idMovie = getId();
         fetch('/cinetech/favorites/addMovie/' + idMovie)
             .then(response => {
@@ -74,6 +78,28 @@ function activateAddToFavorite() {
                     console.error(response.status);
                 }
             })
+    })
+}
+
+function activateAddComment() {
+    const addComment = document.getElementById('add_comment');
+    const commentContent = document.getElementById('comment_content');
+    addComment?.addEventListener('click', async () => {
+        const idMovie = getId();
+        const comment = commentContent.value;
+        console.log(comment)
+        const response = await fetch('/cinetech/movies/addcomment/' + idMovie, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ comment })
+        })
+        if (response.ok) {
+            // window.location.reload();
+        } else {
+            console.error(response.status);
+        }
     })
 }
 
