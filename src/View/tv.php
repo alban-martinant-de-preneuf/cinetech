@@ -14,8 +14,19 @@
     <?php require_once('includes/header.php'); ?>
 
     <main>
-        <div id="main_container"></div>
+        <div id="main_container">
+            <div id="tv_div"></div>
+            <?php if (isset($_SESSION['user'])) : ?>
+                <div id="tv_btns">
+                    <button id="favorite_btn"></button>
+                    <textarea name="comment" id="comment_content"></textarea>
+                    <button id="add_comment">Commenter</button>
+                </div>
+            <?php endif; ?>
+            <div id="comment_div"></div>
+            <div id="reco_div"></div>
+        </div>
     </main>
-    
+
 </body>
 </html>

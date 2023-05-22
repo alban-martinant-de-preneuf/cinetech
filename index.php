@@ -35,6 +35,12 @@
     $commentController->addMovieComment($id, $comment);
   });
 
+  $router->map('POST', '/tvs/addcomment/[i:id]', function ($id) {
+    $comment = json_decode(file_get_contents('php://input'), true)['comment'];
+    $commentController = new CommentController();
+    $commentController->addTvComment($id, $comment);
+  });
+
   $router->map('GET', '/tvs', function () {
     $homeController = new HomeController();
     $homeController->getTvs();
@@ -76,19 +82,29 @@
     $userController->addFavoriteMovie($id);
   });
 
+  $router->map('GET', '/favorites/addTv/[i:id]', function ($id) {
+    $userController = new UserController();
+    $userController->addFavoriteTv($id);
+  });
+
   $router->map('GET', '/movies/getcomments/[i:id]', function ($id) {
     $commentController = new CommentController();
     $commentController->getMovieComments($id);
   });
 
-  // $router->map('GET', '/tvs/getcomments/[i:id]', function ($id) {
-  //   $commentController = new CommentController();
-  //   $commentController->getTvComments($id);
-  // });
+  $router->map('GET', '/tvs/getcomments/[i:id]', function ($id) {
+    $commentController = new CommentController();
+    $commentController->getTvComments($id);
+  });
 
   $router->map('GET', '/favorites/removemovie/[i:id]', function ($id) {
     $userController = new UserController();
     $userController->removeFavoriteMovie($id);
+  });
+
+  $router->map('GET', '/favorites/removetv/[i:id]', function ($id) {
+    $userController = new UserController();
+    $userController->removeFavoriteTv($id);
   });
 
   // match current request url
