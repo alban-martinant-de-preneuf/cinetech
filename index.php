@@ -3,6 +3,10 @@
   use App\Controller\HomeController;
   use App\Controller\MovieController;
   use App\Controller\AuthController;
+  use App\Controller\UserController;
+  use App\Controller\CommentController;
+
+  session_start();
 
   require_once 'vendor/autoload.php';
 
@@ -22,7 +26,13 @@
 
   $router->map('GET', '/movies/[i:id]', function ($id) {
     $movieController = new MovieController();
-    $movieController->getMovie();
+    $movieController->pageMovie();
+  });
+
+  $router->map('POST', '/movies/addcomment/[i:id]', function ($id) {
+    $comment = json_decode(file_get_contents('php://input'), true)['comment'];
+    $commentController = new CommentController();
+    $commentController->addMovieComment($id, $comment);
   });
 
   $router->map('GET', '/tvs', function () {
@@ -32,7 +42,7 @@
 
   $router->map('GET', '/tvs/[i:id]', function ($id) {
     $movieController = new MovieController();
-    $movieController->getTv();
+    $movieController->pageTv();
   });
 
   $router->map('POST', '/login', function () {
@@ -44,6 +54,26 @@
     $authController = new AuthController();
     var_dump($_POST);
     $authController->register($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password'], $_POST['password2']);
+  });
+
+  $router->map('GET', '/logout', function () {
+    session_destroy();
+    header('Location: /cinetech');
+  });
+
+  $router->map('GET', '/favorites', function () {
+    $movieController = new MovieController();
+    $movieController->pageFavorites();
+  });
+
+  $router->map('GET', '/favoritesList', function () {
+    $userController = new UserController();
+    $userController->getFavorites();
+  });
+
+  $router->map('GET', '/favorites/addMovie/[i:id]', function ($id) {
+    $userController = new UserController();
+    $userController->addFavoriteMovie($id);
   });
 
 

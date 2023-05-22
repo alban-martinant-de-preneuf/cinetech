@@ -2,13 +2,22 @@
 
 namespace App\Controller;
 
+use App\Model\UserModel;
+
 class MovieController
 {
-    function getMovie() {
+    function pageMovie()
+    {
         require_once('src/View/movie.php');
     }
 
-    function getTv() {
+    function pageTv()
+    {
         require_once('src/View/tv.php');
+    }
+
+    function pageFavorites()
+    {
+        require_once('src/View/favorites.php');
     }
 }

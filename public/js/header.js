@@ -12,8 +12,6 @@ link.addEventListener('click', (e) => {
   ul.classList.toggle('open');
 })
 
-const authButton = document.getElementById('auth');
-
 function formLogIn() {
   const form = document.createElement('div');
   form.id = 'form_connection';
@@ -124,8 +122,7 @@ function submitSignInForm(e) {
     })
 }
 
-
-authButton.addEventListener('click', (e) => {
+document.getElementById('auth')?.addEventListener('click', (e) => {
   e.preventDefault();
   burger.classList.toggle('open');
   ul.classList.toggle('open');
