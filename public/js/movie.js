@@ -7,11 +7,10 @@ function getId() {
     return idMovie
 }
 
-async function displayContent() {
+const idMovie = getId();
+
+async function displayMovie() {
     const movieDiv = document.getElementById('movie_div')
-
-    const idMovie = getId();
-
     const movie = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "?language=fr-FR");
     const credits = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "/credits?language=fr-FR");
 
@@ -32,21 +31,88 @@ async function displayContent() {
             </div>
         </div>`
     );
+}
 
-    const movieBtnsDiv = document.getElementById('movie_btns');
+async function activateRemoveFavorite(favoriteBtn) {
+    favoriteBtn?.addEventListener('click', () => {
+        fetch('/cinetech/favorites/removemovie/' + idMovie)
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    console.error(response.status);
+                }
+            })
+    })
+}
 
-    // if (movieBtnsDiv) {
-    //     movieBtnsDiv.innerHTML = (
-    //         `<button id="addToFavorite">Ajouter aux favories</button>
-    //         <button id="addComment">Commenter</button>`
-    //     );
-    // }
+async function activateAddToFavorite(favoriteBtn) {
+    favoriteBtn?.addEventListener('click', () => {
+        fetch('/cinetech/favorites/addMovie/' + idMovie)
+            .then(response => {
+                if (response.ok) {
+                    window.location.reload();
+                } else {
+                    console.error(response.status);
+                }
+            })
+    })
+}
 
+async function activateFavorite() {
+    const favoriteBtn = document.getElementById('favorite_btn');
+    if (!favoriteBtn) return;
+
+    const response = await fetch('/cinetech/favoriteslist')
+    const userFavorites = await response.json();
+    if (userFavorites.movies.includes(parseInt(idMovie))) {
+        favoriteBtn.append('Retirer des favoris')
+        activateRemoveFavorite(favoriteBtn);
+    } else {
+        favoriteBtn.append('Ajouter aux favoris')
+        activateAddToFavorite(favoriteBtn);
+    }
+}
+
+function activateAddComment() {
+    const addComment = document.getElementById('add_comment');
+    const commentContent = document.getElementById('comment_content');
+    addComment?.addEventListener('click', async () => {
+        const comment = commentContent.value;
+        console.log(comment)
+        const response = await fetch('/cinetech/movies/addcomment/' + idMovie, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ comment })
+        })
+        if (response.ok) {
+            window.location.reload();
+        } else {
+            console.error(response.status);
+        }
+    })
+}
+
+async function displayComment() {
+    const commentDiv = document.getElementById('comment_div');
+    const comments = await getData('/cinetech/movies/getcomments/' + idMovie);
+    console.log(comments)
+    comments.forEach(comment => {
+        commentDiv.innerHTML += (
+            `<div class="comment">
+                <p class="content_com">${comment.content}</p>
+                <p class="content_author">${comment.firstname}</p>
+            </div>`
+        )
+    })
+}
+
+async function displayRecommendations() {
     const reco = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "/recommendations?language=fr-FR");
 
-    const recoDiv = (document.createElement('div'));
-    recoDiv.classList.add('reco_div');
-    console.log(reco)
+    const recoDiv = document.getElementById('reco_div');
 
     recoDiv.innerHTML = `<h2>Recommandations</h2>`;
     reco.results.forEach(movie => {
@@ -60,49 +126,11 @@ async function displayContent() {
             )
         }
     })
-
-
 }
 
-// const mainContainer = document.getElementById('main_container');
-
-function activateAddToFavorite() {
-    const addToFavorite = document.getElementById('addToFavorite');
-    addToFavorite?.addEventListener('click', () => {
-        const idMovie = getId();
-        fetch('/cinetech/favorites/addMovie/' + idMovie)
-            .then(response => {
-                if (response.ok) {
-                    window.location.reload();
-                } else {
-                    console.error(response.status);
-                }
-            })
-    })
-}
-
-function activateAddComment() {
-    const addComment = document.getElementById('add_comment');
-    const commentContent = document.getElementById('comment_content');
-    addComment?.addEventListener('click', async () => {
-        const idMovie = getId();
-        const comment = commentContent.value;
-        console.log(comment)
-        const response = await fetch('/cinetech/movies/addcomment/' + idMovie, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ comment })
-        })
-        if (response.ok) {
-            // window.location.reload();
-        } else {
-            console.error(response.status);
-        }
-    })
-}
-
-displayContent()
-    .then(() => activateAddToFavorite())
+displayMovie()
+    .then(() => activateFavorite())
     .then(() => activateAddComment());
+
+displayComment();
+displayRecommendations();

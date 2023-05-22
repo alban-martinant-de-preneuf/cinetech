@@ -66,7 +66,7 @@
     $movieController->pageFavorites();
   });
 
-  $router->map('GET', '/favoritesList', function () {
+  $router->map('GET', '/favoriteslist', function () {
     $userController = new UserController();
     $userController->getFavorites();
   });
@@ -76,6 +76,20 @@
     $userController->addFavoriteMovie($id);
   });
 
+  $router->map('GET', '/movies/getcomments/[i:id]', function ($id) {
+    $commentController = new CommentController();
+    $commentController->getMovieComments($id);
+  });
+
+  // $router->map('GET', '/tvs/getcomments/[i:id]', function ($id) {
+  //   $commentController = new CommentController();
+  //   $commentController->getTvComments($id);
+  // });
+
+  $router->map('GET', '/favorites/removemovie/[i:id]', function ($id) {
+    $userController = new UserController();
+    $userController->removeFavoriteMovie($id);
+  });
 
   // match current request url
   $match = $router->match();

@@ -35,4 +35,18 @@ class UserController
             }
         }
     }
+
+    function removeFavoriteMovie($id)
+    {
+        if (isset($_SESSION['user'])) {
+            $userModel = new UserModel();
+            $favId = $userModel->getFavoriteId($_SESSION['user']['id_user']);
+            if ($favId) {
+                $userModel->removeFavoriteMovie($favId, $id);
+            } else {
+                header("HTTP/1.1 400 No favorite list");
+                die();
+            }
+        }
+    }
 }
