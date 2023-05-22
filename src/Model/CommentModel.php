@@ -18,4 +18,19 @@ class CommentModel {
         ]);
     }
 
+    public function getMovieComments($id)
+    {
+        $db = DbConnection::getDb();
+        $sql_request = ("SELECT * FROM comment
+            INNER JOIN user ON comment.id_user = user.id_user
+            WHERE id_mov = :id"
+        );
+        $statement = $db->prepare($sql_request);
+        $statement->execute([
+            ':id' => $id
+        ]);
+        $comments = $statement->fetchAll(\PDO ::FETCH_ASSOC);
+        return $comments;
+    }
+
 }

@@ -6,7 +6,7 @@ async function displayContent() {
     const favoriteDiv = (document.createElement('div'));
     favoriteDiv.classList.add('favorite_div');
 
-    const favorites = await getData('/cinetech/favoritesList');
+    const favorites = await getData('/cinetech/favoriteslist');
     console.log(favorites);
     favoriteDiv.innerHTML = '<h2>Films favoris</h2>';
     for (let idMovie of favorites.movies) {

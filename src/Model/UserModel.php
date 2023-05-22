@@ -90,4 +90,16 @@ class UserModel
         ]);
     }
 
+    public function removeFavoriteMovie($favId, $movieId) {
+        $db = DbConnection::getDb();
+        $sql_request = ("DELETE FROM favorite_movie
+            WHERE id_fav = :id_fav AND id_mov = :id_mov"
+        );
+        $statement = $db->prepare($sql_request);
+        $statement->execute([
+            ':id_fav' => $favId,
+            ':id_mov' => $movieId
+        ]);
+    }
+
 }

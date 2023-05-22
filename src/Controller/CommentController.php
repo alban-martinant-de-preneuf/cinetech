@@ -18,4 +18,11 @@ class CommentController {
         }
     }
 
+    function getMovieComments($id)
+    {
+        $commentModel = new CommentModel();
+        $comments = $commentModel->getMovieComments($id);
+        echo json_encode($comments);
+    }
+
 }
