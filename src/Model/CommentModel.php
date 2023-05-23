@@ -23,7 +23,7 @@ class CommentModel {
         $db = DbConnection::getDb();
         $sql_request = ("SELECT * FROM comment
             INNER JOIN user ON comment.id_user = user.id_user
-            WHERE id_mov = :id"
+            WHERE id_mov = :id AND id_par IS NULL"
         );
         $statement = $db->prepare($sql_request);
         $statement->execute([
