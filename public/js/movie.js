@@ -1,13 +1,13 @@
 import { getData } from "./modules/module.js";
 
-function getId() {
+function getIdMovie() {
     const currentURI = window.location.pathname;
     const parts = currentURI.split('/');
     const idMovie = parts.pop();
     return idMovie
 }
 
-const idMovie = getId();
+const idMovie = getIdMovie();
 
 async function displayMovie() {
     const movieDiv = document.getElementById('movie_div')
@@ -97,15 +97,61 @@ function activateAddComment() {
 
 async function displayComment() {
     const commentDiv = document.getElementById('comment_div');
-    const comments = await getData('/cinetech/movies/getcomments/' + idMovie);
-    console.log(comments)
+    const comments = []
+
+    const apiComments = await getData('https://api.themoviedb.org/3/movie/' + idMovie + '/reviews?language=en-US&page=1')
+    apiComments.results.forEach(comment => {
+        comments.push({ "id": comment.id, "author": comment.author, "content": comment.content })
+    });
+
+    const localComments = await getData('/cinetech/movies/getcomments/' + idMovie);
+    localComments.forEach(comment => {
+        comments.push({ "id": comment.id_com, "author": comment.firstname, "content": comment.content })
+    })
+
     comments.forEach(comment => {
         commentDiv.innerHTML += (
-            `<div class="comment">
+            `<div class="comment_div">
                 <p class="content_com">${comment.content}</p>
-                <p class="content_author">${comment.firstname}</p>
+                <p class="content_author">${comment.author}</p>
+                <button class="res_to_comment" id="res_but_${comment.id}">Répondre</button>
+                <form action="" method="POST" class="response_form hidden" id="form_res_${comment.id}">
+                    <input type="hidden" name="id_parent" value=${comment.id}>
+                    <input type="hidden" name="item_type" value="movie">
+                    <textarea name="content_mes" id="content_mes" cols="30" rows="10"></textarea>
+                    <input type="submit" value="Envoyer">
+                </form>
             </div>`
         )
+    })
+}
+
+async function activateResponseToCom() {
+    const responseBtns = document.querySelectorAll('.res_to_comment');
+    responseBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const id = e.target.id.split('_').pop();
+            document.getElementById('form_res_' + id).classList.toggle('hidden');
+        })
+    })
+}
+
+function activateSendResponse() {
+    const responseForms = document.querySelectorAll('.response_form');
+    responseForms.forEach(form => {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            const response = await fetch('/cinetech/movies/restocom/' + idMovie, {
+                method: 'POST',
+                body: data
+            })
+            if (response.ok) {
+                // window.location.reload();
+            } else {
+                console.error(response.status);
+            }
+        })
     })
 }
 
@@ -132,5 +178,8 @@ displayMovie()
     .then(() => activateFavorite())
     .then(() => activateAddComment());
 
-displayComment();
+displayComment()
+    .then(() => activateResponseToCom())
+    .then(() => activateSendResponse());
+
 displayRecommendations();

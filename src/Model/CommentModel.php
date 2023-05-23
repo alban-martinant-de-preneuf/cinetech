@@ -62,4 +62,21 @@ class CommentModel {
         return $comments;
     }
 
+    public function addResToCom($idUser, $idItem, $idParent, $content, $itemType)
+    {
+        $fieldIdItem = $itemType === "movie" ? "id_mov" : "id_tv";
+        $db = DbConnection::getDb();
+        $sql_request = (
+            "INSERT INTO comment (".$fieldIdItem.", id_user, content, id_par)
+            VALUES (:id_item, :id_user, :content, :id_par)"
+        );
+        $statement = $db->prepare($sql_request);
+        $statement->execute([
+            ':id_item' => $idItem,
+            ':id_user' => $idUser,
+            ':content' => $content,
+            ':id_par' => $idParent
+        ]);
+    }
+
 }
