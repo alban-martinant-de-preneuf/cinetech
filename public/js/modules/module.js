@@ -5,3 +5,12 @@ export async function getData(url) {
     const result = await response.json();
     return result
 }
+
+export function loader() {
+    const loaderDiv = document.createElement('div');
+    loaderDiv.id = 'loader';
+    loaderDiv.innerHTML = (
+        `<div class="spinner"></div>`
+    );
+    document.body.appendChild(loaderDiv);
+}

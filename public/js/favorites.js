@@ -1,8 +1,8 @@
-import { getData } from "./modules/module.js";
+import { getData, loader } from "./modules/module.js";
 
 const mainContainer = document.getElementById('main_container');
 
-async function displayContent() {
+async function getContent() {
     const favoriteDiv = (document.createElement('div'));
     favoriteDiv.classList.add('favorite_div');
 
@@ -38,8 +38,12 @@ async function displayContent() {
             </div>
         `)
     }
-    mainContainer.appendChild(favoriteDiv);
+    return favoriteDiv;
 }
 
-displayContent();
+loader();
+getContent().then(content => {
+    mainContainer.appendChild(content);
+    document.getElementById('loader')?.remove();
+});
 

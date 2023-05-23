@@ -128,9 +128,15 @@ async function displayRecommendations() {
     })
 }
 
-displayTv()
-    .then(() => activateFavorite())
-    .then(() => activateAddComment());
+async function displayContent() {
+    loader();
+    await displayMovie();
+    activateFavorite();
+    activateAddComment();
+    await displayComment();
+    activateResponseToCom();
+    activateSendResponse();
+    await displayRecommendations();
+}
 
-displayComment();
-displayRecommendations();
+displayContent().then(() => document.getElementById('loader')?.remove())
