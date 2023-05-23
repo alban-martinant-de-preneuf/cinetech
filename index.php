@@ -5,6 +5,7 @@
   use App\Controller\AuthController;
   use App\Controller\UserController;
   use App\Controller\CommentController;
+use App\Model\CommentModel;
 
   session_start();
 
@@ -105,6 +106,16 @@
   $router->map('GET', '/favorites/removetv/[i:id]', function ($id) {
     $userController = new UserController();
     $userController->removeFavoriteTv($id);
+  });
+
+  $router->map('POST', '/movies/restocom/[i:id]', function ($id) {
+    $commentController = new CommentController();
+    $commentController->addResToCom(
+      $id,
+      $_POST['id_parent'],
+      $_POST['content_mes'],
+      $_POST['item_type']
+    );
   });
 
   // match current request url

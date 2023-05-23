@@ -170,3 +170,9 @@ div.details_div {
     text-align: center;
     margin-top: 5%;
 }
+
+/* comments */
+
+form.response_form.hidden {
+    display: none;
+}

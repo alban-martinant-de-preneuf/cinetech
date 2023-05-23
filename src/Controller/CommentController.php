@@ -42,4 +42,24 @@ class CommentController
         $comments = $commentModel->getTvComments($id);
         echo json_encode($comments);
     }
+
+    public function addResToCom($idItem, $idParentCom, $content, $itemType)
+    {
+        if (isset($_SESSION['user'])) {
+            $idItem = htmlspecialchars($idItem);
+            $idParentCom = htmlspecialchars($idParentCom);
+            $content = htmlspecialchars($content);
+            $itemType = htmlspecialchars($itemType);
+            $commentModel = new CommentModel();
+            $commentModel->addResToCom(
+                $_SESSION['user']['id_user'],
+                $idItem,
+                $idParentCom,
+                $content,
+                $itemType
+            );
+        } else {
+            header("HTTP/1.1 400 No user connected");
+        }
+    }
 }
