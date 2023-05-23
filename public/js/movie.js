@@ -1,4 +1,4 @@
-import { getData } from "./modules/module.js";
+import { getData, loader } from "./modules/module.js";
 
 function getIdMovie() {
     const currentURI = window.location.pathname;
@@ -174,12 +174,15 @@ async function displayRecommendations() {
     })
 }
 
-displayMovie()
-    .then(() => activateFavorite())
-    .then(() => activateAddComment());
+async function displayContent() {
+    loader();
+    await displayMovie();
+    activateFavorite();
+    activateAddComment();
+    await displayComment();
+    activateResponseToCom();
+    activateSendResponse();
+    await displayRecommendations();
+}
 
-displayComment()
-    .then(() => activateResponseToCom())
-    .then(() => activateSendResponse());
-
-displayRecommendations();
+displayContent().then(() => document.getElementById('loader')?.remove())

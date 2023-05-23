@@ -1,13 +1,13 @@
-import { getData } from "./modules/module.js";
+import { getData, loader } from "./modules/module.js";
 
-function displayContent() {
+async function pageContent() {
     const moviesDiv = (document.createElement('div'));
     moviesDiv.classList.add('movies_div');
 
-    getData("https://api.themoviedb.org/3/discover/tv?language=fr-FR&page=1&sort_by=popularity.desc").then(result => {
-        const items = result.results;
-        for (let tv of items) {
-            moviesDiv.innerHTML += (`
+    const result = await getData("https://api.themoviedb.org/3/discover/tv?language=fr-FR&page=1&sort_by=popularity.desc")
+    const items = result.results;
+    for (let tv of items) {
+        moviesDiv.innerHTML += (`
                 <a href="/cinetech/tvs/${tv.id}">
                     <div class="item_div">
                         <div class="image_container">
@@ -16,11 +16,13 @@ function displayContent() {
                     </div>
                 </a>
             `)
-        }
-    })
-    mainContainer.appendChild(moviesDiv)
+    }
+    return moviesDiv;
 }
 
+loader();
 const mainContainer = document.getElementById('main_container');
-
-displayContent();
+pageContent().then((content) => {
+    mainContainer.appendChild(content);
+    document.getElementById('loader')?.remove();
+})
