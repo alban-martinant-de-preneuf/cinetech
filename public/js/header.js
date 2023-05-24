@@ -14,43 +14,47 @@ link.addEventListener('click', (e) => {
 
 function formLogIn() {
   const form = document.createElement('div');
-  form.id = 'form_connection';
+  form.id = 'form_connection_container';
   form.innerHTML = (
-    `<div class="window_title">
-      <h4>Se connecter</h4>      
-      <button id="close">X</button>
-      <hr>
-    </div>
-    <div id="error"></div>
-    <form id=log_in_form>
-      <input type="text" name="email" placeholder="E-mail utilisateur">
-      <input type="password" name="password" placeholder="Mot de passe">
-      <button type="submit">Se connecter</button>
-    </form>
-    <p>Pas encore de compte ? <button id="sign_in">S'inscrire</a></button>`
+    `<div id="form_connection">
+      <div class="window_title">
+        <h4>Se connecter</h4>      
+        <button id="close">X</button>
+        <hr>
+      </div>
+      <div id="error"></div>
+      <form id=log_in_form>
+        <input type="text" name="email" placeholder="E-mail utilisateur">
+        <input type="password" name="password" placeholder="Mot de passe">
+        <button type="submit">Se connecter</button>
+      </form>
+      <p>Pas encore de compte ? <button id="sign_in">S'inscrire</a></button>
+    </div>`
   )
   return form;
 }
 
 function formSignIn() {
   const form = document.createElement('div');
-  form.id = 'form_connection';
+  form.id = 'form_connection_container';
   form.innerHTML = (
-    `<div class="window_title">
-      <h4>Se connecter</h4>      
-      <button id="close">X</button>
-      <hr>
-    </div>
-    <div id="error"></div>
-      <form id="sign_in_form" action="/cinetech/signin" method="POST">
-        <input type="text" name="email" placeholder="E-mail utilisateur">
-        <input type="text" name="firstname" placeholder="Prénom">
-        <input type="text" name="lastname" placeholder="Nom">
-        <input type="password" name="password" placeholder="Mot de passe">
-        <input type="password" name="password2" placeholder="Confirmer le mot de passe">
-        <button type="submit">S'inscrire</button>
-      </form>
-        <p>Déjà un compte ? <button id="log_in">Se connecter</a></button>
+    `<div id="form_connection">
+      <div class="window_title">
+        <h4>Se connecter</h4>      
+        <button id="close">X</button>
+        <hr>
+      </div>
+      <div id="error"></div>
+        <form id="sign_in_form" action="/cinetech/signin" method="POST">
+          <input type="text" name="email" placeholder="E-mail utilisateur">
+          <input type="text" name="firstname" placeholder="Prénom">
+          <input type="text" name="lastname" placeholder="Nom">
+          <input type="password" name="password" placeholder="Mot de passe">
+          <input type="password" name="password2" placeholder="Confirmer le mot de passe">
+          <button type="submit">S'inscrire</button>
+        </form>
+          <p>Déjà un compte ? <button id="log_in">Se connecter</a></button>
+      </div>
     </div>`
   )
   return form;
@@ -60,7 +64,7 @@ function activateCloseButton() {
   const close = document.getElementById('close');
   close.addEventListener('click', () => {
     main.classList.toggle('blur');
-    document.querySelector('#form_connection').remove();
+    document.querySelector('#form_connection_container').remove();
   })
 }
 
@@ -136,11 +140,23 @@ const searchResults = document.getElementById('search_results');
 function displayResults(results) {
   const ul = document.createElement('ul');
   results.forEach(result => {
-    ul.innerHTML += (
-      `<li>
-          <a href="/cinetech/movies/${result.id}">${result.title}</a>
-      </li>`
-    )
+    if (result.media_type === 'movie') {
+      ul.innerHTML += (
+        `<li>Film : 
+            <a href="/cinetech/movies/${result.id}">
+              ${result.title}
+            </a>
+        </li>`
+      )
+    } else if (result.media_type === 'tv') {
+      ul.innerHTML += (
+        `<li>Série : 
+            <a href="/cinetech/tvs/${result.id}">
+              ${result.name}
+            </a>
+        </li>`
+      )
+    } 
   })
   searchResults.appendChild(ul);
 }
@@ -150,7 +166,8 @@ function search() {
     const searchValue = e.target.value;
     searchResults.innerHTML = '';
     if (searchValue.length > 2) {
-      const movies = await getData("https://api.themoviedb.org/3/search/movie?language=fr-FR&query=" + searchValue);
+      const movies = await getData("https://api.themoviedb.org/3/search/multi?language=fr-FR&query=" + searchValue);
+      console.log(movies)
       displayResults(movies.results);
     }
   })

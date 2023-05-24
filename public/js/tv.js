@@ -1,4 +1,4 @@
-import { getData } from "./modules/module.js";
+import { getData, loader } from "./modules/module.js";
 
 function getId() {
     const currentURI = window.location.pathname;
@@ -109,6 +109,35 @@ async function displayComment() {
     })
 }
 
+async function activateResponseToCom() {
+    const responseBtns = document.querySelectorAll('.res_to_comment');
+    responseBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const id = e.target.id.split('_').pop();
+            document.getElementById('form_res_' + id).classList.toggle('hidden');
+        })
+    })
+}
+
+function activateSendResponse() {
+    const responseForms = document.querySelectorAll('.response_form');
+    responseForms.forEach(form => {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            const response = await fetch('/cinetech/movies/restocom/' + idMovie, {
+                method: 'POST',
+                body: data
+            })
+            if (response.ok) {
+                // window.location.reload();
+            } else {
+                console.error(response.status);
+            }
+        })
+    })
+}
+
 async function displayRecommendations() {
     const reco = await getData("https://api.themoviedb.org/3/tv/" + idTv + "/recommendations?language=fr-FR");
 
@@ -130,7 +159,7 @@ async function displayRecommendations() {
 
 async function displayContent() {
     loader();
-    await displayMovie();
+    await displayTv();
     activateFavorite();
     activateAddComment();
     await displayComment();

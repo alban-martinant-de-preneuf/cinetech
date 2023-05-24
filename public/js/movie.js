@@ -147,7 +147,7 @@ function activateSendResponse() {
                 body: data
             })
             if (response.ok) {
-                // window.location.reload();
+                window.location.reload();
             } else {
                 console.error(response.status);
             }
