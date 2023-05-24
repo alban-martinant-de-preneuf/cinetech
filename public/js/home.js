@@ -3,6 +3,7 @@ import { getData, loader } from "./modules/module.js";
 let currentSlide = 0;
 let slideToDisplay = 2;
 let windowWidth = window.innerWidth;
+let imageSize = 185;
 
 function setSlideToDisplay(imageSize) {
     windowWidth = window.innerWidth;
@@ -27,7 +28,7 @@ function setSlideToDisplay(imageSize) {
     }
 }
 
-setSlideToDisplay(185)
+setSlideToDisplay(imageSize)
 
 function showSlide(index, carouselItems) {
     if (index < 0) {
@@ -57,9 +58,6 @@ function slideLeft(carouselItems) {
 
 async function getContent(div, request, itemType) {
 
-    // const trendingMoviesDiv = (document.createElement('div'));
-    // trendingMoviesDiv.classList.add('popular_div');'https://api.themoviedb.org/3/trending/movie/day?language=fr-FR&page=1'
-
     const result = await getData(request)
     const items = result.results;
     const carousel = document.createElement('div');
@@ -70,7 +68,7 @@ async function getContent(div, request, itemType) {
             <div class="carousel_item">
                 <a href="/cinetech/${itemType}/${item.id}">
                     <div class="image_container">
-                        <img src="https://image.tmdb.org/t/p/w185/${item.poster_path}">
+                        <img src="https://image.tmdb.org/t/p/w${imageSize}/${item.poster_path}">
                     </div>
                 </a>
             </div>
@@ -92,33 +90,12 @@ async function getContent(div, request, itemType) {
 
     showSlide(currentSlide, carouselItems)
     window.addEventListener('resize', () => {
-        setSlideToDisplay(185);
+        setSlideToDisplay(imageSize);
         showSlide(currentSlide, carouselItems)
     })
 
     return div
 }
-
-// async function contentTvs() {
-//     const trendingTvDiv = (document.createElement('div'));
-//     trendingTvDiv.classList.add('popular_div');
-
-//     const result = await getData('https://api.themoviedb.org/3/trending/tv/day?language=fr-FR&page=1')
-//     const items = result.results;
-//     trendingTvDiv.innerHTML = '<h2>Series tendance</h2>';
-//     for (let i = 0; i < 4; i++) {
-//         trendingTvDiv.innerHTML += (`
-//                 <div class="item_div">
-//                     <a href="/cinetech/tvs/${items[i].id}">
-//                         <div class="image_container">
-//                             <img src="https://image.tmdb.org/t/p/w342/${items[i].poster_path}">
-//                         </div>
-//                     </a>
-//                 </div>
-//             `)
-//     }
-//     return trendingTvDiv;
-// }
 
 async function dislplayContent() {
     loader();

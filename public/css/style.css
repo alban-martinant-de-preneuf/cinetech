@@ -1,6 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
+
+
 body {
     background-color: black;
     color: #e9e9e9;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    font-size: 3em;
 }
 
 main {
@@ -10,6 +18,11 @@ main {
 
 .blur {
     filter: blur(5px);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 /* header */
@@ -71,6 +84,7 @@ div#search_results {
     left: 50%;
     transform: translate(-50%, -50%); */
     background-color: blanchedalmond;
+    color: black;
     z-index: 9999;
 }
 
@@ -91,15 +105,20 @@ div.item_div>h3 {
     font-size: 1.5em;
 }
 
-div.item_div {
-    /* width: 80%; */
-    max-width: 342px;
+.flex_wrap {
+    display: flex;
+    flex-wrap: wrap;
 }
+
+/* div.item_div {
+    /* width: 80%; 
+    max-width: 342px;
+}*/
 
 .image_container>img {
     width: 100%;
-    max-width: 342px;
-}
+    /* max-width: 342px; */
+} 
 
 /* header */
 
@@ -166,6 +185,7 @@ ul.list-menu.open {
     width: 40%;
     padding: 5%;
     background-color: #e9e9e9;
+    color: black;
 }
 
 /* details */

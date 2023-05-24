@@ -4,7 +4,7 @@ const mainContainer = document.getElementById('main_container');
 
 async function getContent() {
     const favoriteDiv = (document.createElement('div'));
-    favoriteDiv.classList.add('favorite_div');
+    favoriteDiv.classList.add('favorite_div', 'flex_wrap');
 
     const favorites = await getData('/cinetech/favoriteslist');
     console.log(favorites);
@@ -17,7 +17,7 @@ async function getContent() {
             <div class="item_div">
                 <a href="/cinetech/movies/${movie.id}">
                     <div class="image_container">
-                        <img src="https://image.tmdb.org/t/p/w342/${movie.poster_path}">
+                        <img src="https://image.tmdb.org/t/p/w185/${movie.poster_path}">
                     </div>
                 </a>
             </div>
@@ -32,7 +32,7 @@ async function getContent() {
             <div class="item_div">
                 <a href="/cinetech/tvs/${tv.id}">
                     <div class="image_container">
-                        <img src="https://image.tmdb.org/t/p/w342/${tv.poster_path}">
+                        <img src="https://image.tmdb.org/t/p/w185/${tv.poster_path}">
                     </div>
                 </a>
             </div>

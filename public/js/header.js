@@ -140,11 +140,23 @@ const searchResults = document.getElementById('search_results');
 function displayResults(results) {
   const ul = document.createElement('ul');
   results.forEach(result => {
-    ul.innerHTML += (
-      `<li>
-          <a href="/cinetech/movies/${result.id}">${result.title}</a>
-      </li>`
-    )
+    if (result.media_type === 'movie') {
+      ul.innerHTML += (
+        `<li>Film : 
+            <a href="/cinetech/movies/${result.id}">
+              ${result.title}
+            </a>
+        </li>`
+      )
+    } else if (result.media_type === 'tv') {
+      ul.innerHTML += (
+        `<li>Série : 
+            <a href="/cinetech/tvs/${result.id}">
+              ${result.name}
+            </a>
+        </li>`
+      )
+    } 
   })
   searchResults.appendChild(ul);
 }
@@ -154,7 +166,8 @@ function search() {
     const searchValue = e.target.value;
     searchResults.innerHTML = '';
     if (searchValue.length > 2) {
-      const movies = await getData("https://api.themoviedb.org/3/search/movie?language=fr-FR&query=" + searchValue);
+      const movies = await getData("https://api.themoviedb.org/3/search/multi?language=fr-FR&query=" + searchValue);
+      console.log(movies)
       displayResults(movies.results);
     }
   })
