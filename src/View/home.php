@@ -13,7 +13,7 @@
 <body>
     <?php require_once('includes/header.php'); ?>
 
-    <main class="test">
+    <main>
         <div id="main_container">
             <div class="popular_div">
                 <h2>Films tendance</h2>

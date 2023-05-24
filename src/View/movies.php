@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/cinetech/public/css/reset.css">
     <link rel="stylesheet" href="/cinetech/public/css/style.css">
     <title>Les films</title>
-    <script type="module" src="/cinetech/public/js/movies.js"></script>
+    <script type="module" src="/cinetech/public/js/items.js"></script>
     <script type="module" src="/cinetech/public/js/header.js"></script>
 </head>
 
@@ -16,8 +16,20 @@
     <?php require_once('includes/header.php'); ?>
 
     <main>
+
         <h1>Les films</h1>
+        <div class="pagination">
+            <button class="previous">précédent</button>
+            <button class="next">suivant</button>
+        </div>
+
         <div id="main_container"></div>
+
+        <div class="pagination">
+            <button class="previous">précédent</button>
+            <button class="next">suivant</button>
+        </div>
+
     </main>
 
 </body>
