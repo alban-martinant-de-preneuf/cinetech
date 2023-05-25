@@ -224,6 +224,11 @@ ul.list-menu.open {
     color: black;
 }
 
+.list-menu a:hover {
+    color: #b90000;
+    text-decoration: underline;
+} 
+
 /* details */
 
 div.details_div {
