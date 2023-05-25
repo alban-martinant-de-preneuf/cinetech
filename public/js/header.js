@@ -190,25 +190,6 @@ magnifying.addEventListener('click', () => {
   document.getElementById('search').setAttribute('style', 'border: 1px solid #e9e9e9');
   searchInput.classList.toggle('active');
   searchInput.focus();
-  // searchInput.addEventListener('blur', (e) => {
-  //   alert(e.currentTarget.value);
-  //   alert(e.relatedTarget);
-  //   // searchInput.classList.remove('active');
-  //   // setTimeout(() => {
-  //   //   magnifying.setAttribute('style', 'display: block');
-  //   //   document.getElementById('search').setAttribute('style', 'border: 0');
-  //   // }, 500);
-  //   // document.getElementById('search_results').innerHTML = '';
-  // });
-  // document.addEventListener('click', (e) => {
-  //   if (ul.classList.contains('open')
-  //     && e.target !== burger
-  //     && e.target !== burgerDiv
-  //     && e.target !== ul) {
-  //     burger.classList.remove('open');
-  //     ul.classList.remove('open');
-  //   }
-  // });
 });
 
 // listen for click outside to close

@@ -28,6 +28,8 @@
     <div class="bottom">
         <div id="magnifying"><i class="fa-solid fa-magnifying-glass"></i></div>
         <input type="search" name="search" id="search">
-        <div id="search_results"></div>
+        <div>
+            <div id="search_results"></div>
+        </div>
     </div>
 </header>

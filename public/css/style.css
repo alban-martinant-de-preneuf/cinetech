@@ -114,6 +114,7 @@ div.form_bottom {
 
 div.bottom {
     display: flex;
+    flex-direction: column;
     height: 20px;
     padding-left: 5px;
 }
@@ -129,18 +130,21 @@ input#search {
 
 input#search.active {
     width: 150px;
+    padding-left: 5px;
     color: #e9e9e9;
     transition: all 0.5s ease-in-out;
 }
 
 div#search_results {
     position: absolute;
-    /* top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-    background-color: antiquewhite;
-    color: black;
+    background-color: black;
     z-index: 9999;
+}
+
+div#search_results ul {
+    padding: 5px;
+    color: #e9e9e9;
+    border: 1px solid #e9e9e9;
 }
 
 div#magnifying {
