@@ -19,15 +19,15 @@
 
         <h1>Les films</h1>
         <div class="pagination">
-            <button class="previous">précédent</button>
-            <button class="next">suivant</button>
+            <button class="previous"> << précédent</button>
+            <button class="next">suivant >></button>
         </div>
 
         <div id="main_container"></div>
 
         <div class="pagination">
-            <button class="previous">précédent</button>
-            <button class="next">suivant</button>
+            <button class="previous"> << précédent</button>
+            <button class="next">suivant >></button>
         </div>
 
     </main>

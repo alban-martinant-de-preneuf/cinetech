@@ -28,7 +28,9 @@ function formLogIn() {
         <input type="password" name="password" placeholder="Mot de passe">
         <button type="submit">Se connecter</button>
       </form>
-      <p>Pas encore de compte ? <button id="sign_in">S'inscrire</a></button>
+      <div class="form_bottom">
+        Pas encore de compte ? <button id="sign_in">S'inscrire</a></button>
+      </div>
     </div>`
   )
   return form;
@@ -53,7 +55,9 @@ function formSignIn() {
           <input type="password" name="password2" placeholder="Confirmer le mot de passe">
           <button type="submit">S'inscrire</button>
         </form>
-          <p>Déjà un compte ? <button id="log_in">Se connecter</a></button>
+        <div class="form_bottom">
+          Déjà un compte ? <button id="log_in">Se connecter</a></button>
+        </div>
       </div>
     </div>`
   )
@@ -69,14 +73,14 @@ function activateCloseButton() {
 }
 
 function displayLogInForm() {
-  document.querySelector('#form_connection')?.remove();
+  document.querySelector('#form_connection_container')?.remove();
   document.body.appendChild(formLogIn());
   const signInButton = document.getElementById('sign_in');
   const logInForm = document.getElementById('log_in_form');
   activateCloseButton();
 
   signInButton.addEventListener('click', () => {
-    document.querySelector('#form_connection').remove();
+    document.querySelector('#form_connection_container').remove();
     document.body.appendChild(formSignIn());
     activateCloseButton();
     document.getElementById('log_in').addEventListener('click', displayLogInForm);

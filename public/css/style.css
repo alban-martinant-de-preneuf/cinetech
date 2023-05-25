@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
 body {
     background-color: black;
@@ -41,6 +40,25 @@ header .top {
 
 /* connection */
 
+form#log_in_form,
+form#sign_in_form {
+    display: flex;
+    flex-direction: column;
+}
+
+div.form_bottom button {
+    border: none;
+    background-color: transparent;
+    color: black;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: inherit;
+}
+
+div.form_bottom button:hover {
+    color: #b90000;
+}
+
 div#form_connection_container {
     position: absolute;
     top: 0;
@@ -70,6 +88,11 @@ div#error {
     top: 0;
     right: 0;
     margin: 2%
+}
+
+div.form_bottom {
+    margin-top: 20px;
+    font-size: 0.7em;
 }
 
 /* search */
@@ -110,14 +133,12 @@ div.item_div>h3 {
     flex-wrap: wrap;
 }
 
-/* div.item_div {
-    /* width: 80%; 
-    max-width: 342px;
-}*/
+div.item_div {
+    flex-grow: 1;
+}
 
 .image_container>img {
     width: 100%;
-    /* max-width: 342px; */
 } 
 
 /* header */
@@ -310,4 +331,27 @@ form.response_form.hidden {
 .chevron.left:before {
 	left: 0.25em;
 	transform: rotate(-135deg);
+}
+
+/* pagination */
+
+div.pagination {
+    display: flex;
+    justify-content: space-between;
+}
+
+button.previous,
+button.next {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    color: white;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+
+button.previous:hover,
+button.next:hover {
+    /* background-color: #c92229; */
+    color: #c92229;
+    text-decoration: underline;
 }
