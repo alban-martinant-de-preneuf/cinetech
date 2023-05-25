@@ -46,6 +46,19 @@ form#sign_in_form {
     flex-direction: column;
 }
 
+div.auth_div button {
+    border: none;
+    background-color: transparent;
+    color: black;
+    cursor: pointer;
+    border: black 1px solid;
+}
+
+div.auth_div button:hover {
+    color: #b90000;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
 div.form_bottom button {
     border: none;
     background-color: transparent;
@@ -57,6 +70,8 @@ div.form_bottom button {
 
 div.form_bottom button:hover {
     color: #b90000;
+    background-color: transparent;
+
 }
 
 div#form_connection_container {

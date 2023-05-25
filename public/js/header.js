@@ -16,7 +16,7 @@ function formLogIn() {
   const form = document.createElement('div');
   form.id = 'form_connection_container';
   form.innerHTML = (
-    `<div id="form_connection">
+    `<div id="form_connection" class="auth_div">
       <div class="window_title">
         <h4>Se connecter</h4>      
         <button id="close">X</button>
@@ -40,7 +40,7 @@ function formSignIn() {
   const form = document.createElement('div');
   form.id = 'form_connection_container';
   form.innerHTML = (
-    `<div id="form_connection">
+    `<div id="form_connection" class="auth_div">
       <div class="window_title">
         <h4>Se connecter</h4>      
         <button id="close">X</button>
