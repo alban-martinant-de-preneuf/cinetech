@@ -143,6 +143,10 @@ div#search_results {
     z-index: 9999;
 }
 
+div#magnifying {
+    cursor: pointer;
+}
+
 /* home */
 
 div.popular_div {

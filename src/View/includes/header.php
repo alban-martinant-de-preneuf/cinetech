@@ -10,7 +10,7 @@
                         <span id="burger"></span>
                     </div>
                 </a>
-                <ul id="list-menu" class="te">
+                <ul id="list-menu">
                     <?php if (isset($_SESSION['user'])) : ?>
                         <li><a href="/cinetech/profile" id="profile">Profil</a></li>
                         <li><a href="/cinetech/favorites" id="logout">Mes favoris</a></li>
