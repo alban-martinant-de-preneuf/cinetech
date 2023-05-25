@@ -112,8 +112,25 @@ div.form_bottom {
 
 /* search */
 
-div .bottom {
-    position: relative;
+div.bottom {
+    display: flex;
+    height: 20px;
+    padding-left: 5px;
+}
+
+input#search {
+    width: 0;
+    padding: 0;
+    border: 0;
+    background-color: black;
+    transition: all 0.5s ease-in-out;
+    outline: none;
+}
+
+input#search.active {
+    width: 150px;
+    color: #e9e9e9;
+    transition: all 0.5s ease-in-out;
 }
 
 div#search_results {
@@ -121,7 +138,7 @@ div#search_results {
     /* top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); */
-    background-color: blanchedalmond;
+    background-color: antiquewhite;
     color: black;
     z-index: 9999;
 }
@@ -131,7 +148,7 @@ div#search_results {
 div.popular_div {
     display: flex;
     flex-direction: column;
-    margin-top: 5%;
+    margin-top: 3%;
 }
 
 div.popular_div>h2 {
@@ -154,7 +171,7 @@ div.item_div {
 
 .image_container>img {
     width: 100%;
-} 
+}
 
 /* header */
 
@@ -209,7 +226,7 @@ nav {
     height: 30px;
 }
 
-ul.list-menu {
+ul#list-menu {
     width: 0px;
     position: absolute;
     padding: 5%;
@@ -223,16 +240,16 @@ ul.list-menu {
     white-space: nowrap;
 }
 
-ul.list-menu.open {
+ul#list-menu.open {
     width: 40%;
     z-index: 9999;
     transition: all 0.5s ease-in-out;
 }
 
-.list-menu a:hover {
+#list-menu a:hover {
     color: #b90000;
     text-decoration: underline;
-} 
+}
 
 /* details */
 
@@ -330,32 +347,32 @@ form.response_form.hidden {
 }
 
 .chevron::before {
-	border-style: solid;
-	border-width: 0.25em 0.25em 0 0;
-	content: '';
-	display: inline-block;
-	height: 0.45em;
-	left: 0.15em;
-	position: relative;
-	top: 0.15em;
-	transform: rotate(-45deg);
-	vertical-align: top;
-	width: 0.45em;
+    border-style: solid;
+    border-width: 0.25em 0.25em 0 0;
+    content: '';
+    display: inline-block;
+    height: 0.45em;
+    left: 0.15em;
+    position: relative;
+    top: 0.15em;
+    transform: rotate(-45deg);
+    vertical-align: top;
+    width: 0.45em;
 }
 
 .chevron.right:before {
-	left: 0;
-	transform: rotate(45deg);
+    left: 0;
+    transform: rotate(45deg);
 }
 
 .chevron.bottom:before {
-	top: 0;
-	transform: rotate(135deg);
+    top: 0;
+    transform: rotate(135deg);
 }
 
 .chevron.left:before {
-	left: 0.25em;
-	transform: rotate(-135deg);
+    left: 0.25em;
+    transform: rotate(-135deg);
 }
 
 /* pagination */

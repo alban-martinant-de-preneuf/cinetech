@@ -1,17 +1,36 @@
 import { getData } from "./modules/module.js";
 
+// select elements
 const link = document.getElementById('link')
 const burger = document.getElementById('burger')
+const burgerDiv = document.getElementById('burger_div')
 const ul = document.querySelector('ul')
-// const title = document.getElementById('img_logo');
 const main = document.querySelector('main');
 
+// listen for click on burger
 link.addEventListener('click', (e) => {
   e.preventDefault();
   burger.classList.toggle('open');
   ul.classList.toggle('open');
+  ul.focus();
+  ul.addEventListener('blur', () => {
+    burger.classList.remove('open');
+    ul.classList.remove('open');
+  });
 })
 
+// listen for click outside of menu to close it
+document.addEventListener('click', (e) => {
+  if (ul.classList.contains('open')
+    && e.target !== burger
+    && e.target !== burgerDiv
+    && e.target !== ul) {
+    burger.classList.remove('open');
+    ul.classList.remove('open');
+  }
+});
+
+// function to create the form to log in
 function formLogIn() {
   const form = document.createElement('div');
   form.id = 'form_connection_container';
@@ -36,6 +55,7 @@ function formLogIn() {
   return form;
 }
 
+// function to create the form to sign in
 function formSignIn() {
   const form = document.createElement('div');
   form.id = 'form_connection_container';
@@ -64,6 +84,7 @@ function formSignIn() {
   return form;
 }
 
+//  function to activate the close button of the form
 function activateCloseButton() {
   const close = document.getElementById('close');
   close.addEventListener('click', () => {
@@ -72,6 +93,7 @@ function activateCloseButton() {
   })
 }
 
+// function to display the form to log in
 function displayLogInForm() {
   document.querySelector('#form_connection_container')?.remove();
   document.body.appendChild(formLogIn());
@@ -92,6 +114,7 @@ function displayLogInForm() {
   logInForm.addEventListener('submit', submitLogInForm);
 }
 
+// function to submit the form to log in
 function submitLogInForm(e) {
   e.preventDefault();
   const data = new FormData(e.target);
@@ -110,6 +133,7 @@ function submitLogInForm(e) {
     })
 }
 
+// function to submit the form to sign in
 function submitSignInForm(e) {
   e.preventDefault();
   console.log(e.target);
@@ -130,6 +154,7 @@ function submitSignInForm(e) {
     })
 }
 
+// listen for click on auth button to display the form
 document.getElementById('auth')?.addEventListener('click', (e) => {
   e.preventDefault();
   burger.classList.toggle('open');
@@ -138,9 +163,14 @@ document.getElementById('auth')?.addEventListener('click', (e) => {
   displayLogInForm();
 })
 
+/* search */
+
+// select elements
 const searchInput = document.getElementById('search');
+const magnifying = document.getElementById('magnifying');
 const searchResults = document.getElementById('search_results');
 
+// function to display the results of the search
 function displayResults(results) {
   const ul = document.createElement('ul');
   results.forEach(result => {
@@ -160,11 +190,28 @@ function displayResults(results) {
             </a>
         </li>`
       )
-    } 
+    }
   })
   searchResults.appendChild(ul);
 }
 
+// listen for click on the magnifying glass to display the search input
+magnifying.addEventListener('click', () => {
+  magnifying.setAttribute('style', 'display: none');
+  document.getElementById('search').setAttribute('style', 'border: 1px solid #e9e9e9');
+  searchInput.classList.toggle('active');
+  searchInput.focus();
+  searchInput.addEventListener('blur', () => {
+    searchInput.classList.remove('active');
+    setTimeout(() => {
+      magnifying.setAttribute('style', 'display: block');
+      document.getElementById('search').setAttribute('style', 'border: 0');
+    }, 500);
+    document.getElementById('search_results').innerHTML = '';
+  });
+});
+
+// function to fetch data from the API
 function search() {
   searchInput.addEventListener('input', async (e) => {
     const searchValue = e.target.value;
