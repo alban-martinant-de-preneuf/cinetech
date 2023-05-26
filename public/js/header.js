@@ -113,7 +113,7 @@ function submitLogInForm(e) {
   })
     .then(response => {
       if (response.status === 200) {
-        window.location = '/cinetech';
+        window.location.reload();
       } else {
         console.log(response.statusText);
         const error = document.getElementById('error');
