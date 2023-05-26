@@ -12,7 +12,7 @@
                 </a>
                 <ul id="list-menu">
                     <?php if (isset($_SESSION['user'])) : ?>
-                        <li><a href="/cinetech/profile" id="profile">Profil</a></li>
+                        <!-- <li><a href="/cinetech/profile" id="profile">Profil</a></li> -->
                         <li><a href="/cinetech/favorites" id="logout">Mes favoris</a></li>
                         <li><a href="/cinetech/logout" id="logout">Se déconnecter</a></li>
                     <?php else : ?>

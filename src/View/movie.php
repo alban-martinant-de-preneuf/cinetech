@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,23 +12,27 @@
     <script type="module" src="/cinetech/public/js/movie.js"></script>
     <script type="module" src="/cinetech/public/js/header.js"></script>
 </head>
+
 <body>
     <?php require_once('includes/header.php'); ?>
 
     <main>
         <div id="main_container">
-            <div id="movie_div"></div>
-            <?php if (isset($_SESSION['user'])) : ?>
-                <div id="movie_btns">
-                    <button id="favorite_btn"></button>
-                    <textarea name="comment" id="comment_content"></textarea>
-                    <button id="add_comment">Commenter</button>
-                </div>
-            <?php endif; ?>
-            <div id="comment_div"></div>
-            <div id="reco_div"></div>
+            <div id="movie_div">
+                <div id="details_div"></div>
+                <?php if (isset($_SESSION['user'])) : ?>
+                    <div id="movie_btns">
+                        <button id="favorite_btn"></button>
+                        <textarea name="comment" id="comment_content"></textarea>
+                        <button id="add_comment">Commenter</button>
+                    </div>
+                <?php endif; ?>
+                <div id="comments_div"></div>
+                <div id="reco_div"></div>
+            </div>
         </div>
     </main>
 
 </body>
+
 </html>

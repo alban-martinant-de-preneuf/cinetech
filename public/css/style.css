@@ -4,6 +4,7 @@ body {
     background-color: black;
     color: #e9e9e9;
     font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -235,7 +236,6 @@ nav {
 }
 
 ul#list-menu {
-    width: 0px;
     position: absolute;
     padding: 5%;
     right: -10%;
@@ -261,17 +261,107 @@ ul#list-menu.open {
 
 /* details */
 
-div.details_div {
+div#details_div {
     display: flex;
     flex-direction: column;
     text-align: center;
     margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+div#details_div img {
+    width: 60%;
+    margin: auto;
+}
+
+div.movie_details {
+    text-align: left;
+}
+
+span.movie_details_item {
+    font-weight: bold;
+    color: #e9e9e980;
+}
+
+div.movie_details h2,
+div#comments_div h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-top: 5%;
+}
+
+div.movie_details h5 {
+    font-size: 0.9em;
+    color: #e9e9e980;
+}
+
+div#details_div p {
+    margin-top: 3%;
 }
 
 /* comments */
 
 form.response_form.hidden {
     display: none;
+}
+
+div#comments_div {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+div#comment_div {
+    border: 1px solid #e9e9e9;
+
+}
+
+div#comments_div>div {
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+}
+
+div.author_content {
+    display: flex;
+    flex-direction: column;
+}
+
+div.author {
+    height: 2em;
+    border: 1px solid #e9e9e9;
+}
+
+div.content {
+    position: relative;
+    min-height: calc(3rem + 20px);
+    height: calc(3rem + 20px);
+    line-height: 1.1rem;
+    padding: 10px;
+    border: 1px solid #e9e9e9;
+}
+
+div.content.opened {
+    height: fit-content;
+}
+
+
+div.content>p {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+div.content::before {
+    content: "Voir plus";
+    position: absolute;
+    bottom: 6px;
+    right: 10px;
+    padding-left: 50px;
+    background: linear-gradient(90deg, #e9e9e900, black 50px);
+}
+
+div.content.opened::before {
+    content: "Voir moins";
 }
 
 /* loader */
