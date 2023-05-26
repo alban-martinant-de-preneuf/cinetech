@@ -73,6 +73,19 @@ async function activateFavorite() {
 }
 
 function activateAddComment() {
+    const addComment = document.getElementById('comment_btn');
+    const commentForm = document.getElementById('form_comment_div');
+    addComment?.addEventListener('click', () => {
+        if (commentForm.style.display === 'block') {
+            commentForm.style.display = 'none';
+        } else {
+            commentForm.style.display = 'block';
+        }
+    })
+}
+
+function activateSendComment() {
+    activateAddComment();
     const addComment = document.getElementById('add_comment');
     const commentContent = document.getElementById('comment_content');
     addComment?.addEventListener('click', async () => {
@@ -196,7 +209,7 @@ async function displayContent() {
     loader();
     await displayMovie();
     activateFavorite();
-    activateAddComment();
+    activateSendComment();
     await displayComment();
     activateResponseToCom();
     activateSendResponse();

@@ -23,8 +23,11 @@
                 <?php if (isset($_SESSION['user'])) : ?>
                     <div id="movie_btns">
                         <button id="favorite_btn"></button>
+                        <button id="comment_btn">Ajouter un commentaire</button>
+                    </div>
+                    <div id="form_comment_div">
                         <textarea name="comment" id="comment_content"></textarea>
-                        <button id="add_comment">Commenter</button>
+                        <button id="add_comment">Evoyer</button>
                     </div>
                 <?php endif; ?>
                 <div id="comments_div"></div>

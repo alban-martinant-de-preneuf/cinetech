@@ -299,6 +299,10 @@ div#details_div p {
     margin-top: 3%;
 }
 
+div#form_comment_div {
+    display: none;
+}
+
 /* comments */
 
 form.response_form.hidden {
