@@ -372,6 +372,7 @@ div.content.opened::before {
 
 div.responses_com {
     margin-left: 5%;
+    display: none;
 }
 
 /* loader */

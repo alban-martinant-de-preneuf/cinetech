@@ -134,13 +134,13 @@ async function displayComment() {
                     </div>
                 </div>
                 <div class="comment_response">
-                    <button class="res_to_comment" id="res_but_${comment.id}">Répondre</button>
+                <button class="res_to_comment" id="res_but_${comment.id}">Répondre</button>
+                <button class="display_res_but" id="display_${comment.id}">Afficher les réponses</button>
                     <form action="" method="POST" class="response_form hidden" id="form_res_${comment.id}">
                         <input type="hidden" name="id_parent" value=${comment.id}>
                         <input type="hidden" name="item_type" value="movie">
                         <textarea name="content_mes" id="content_mes" cols="30" rows="10"></textarea>
                         <input type="submit" value="Envoyer">
-                        <input type="button" value="Afficher les réponses">
                     </form>
                 <div id="responses_${comment.id}" class="responses_com"></div>
             </div>`
@@ -178,6 +178,25 @@ async function displayResponsesToCom(idComment) {
     })
 }
 
+function activateDisplayResponses() {
+    const displayBtns = document.querySelectorAll('.display_res_but');
+    displayBtns.forEach(btn => {
+        const id = btn.id.split('_').pop();
+        const responsesDiv = document.querySelector('#responses_' + id);
+        if (responsesDiv.innerHTML === '') {
+            btn.style.display = 'none';
+        }
+        btn.addEventListener('click', (e) => {
+            const id = e.target.id.split('_').pop();
+            const responsesDiv = document.querySelector('#responses_' + id);
+            if (responsesDiv.style.display === 'block') {
+                responsesDiv.style.display = 'none';
+            } else {
+                responsesDiv.style.display = 'block';
+            }
+        })
+    })
+}
 
 function activateSeeMore() {
     const content = document.querySelectorAll('.content');
@@ -192,6 +211,7 @@ function activateSeeMore() {
         }
     })
 }
+
 
 async function activateResponseToCom() {
     const responseBtns = document.querySelectorAll('.res_to_comment');
@@ -249,6 +269,7 @@ async function displayContent() {
     await displayComment();
     activateResponseToCom();
     activateSendResponse();
+    activateDisplayResponses();
     await displayRecommendations();
 }
 
