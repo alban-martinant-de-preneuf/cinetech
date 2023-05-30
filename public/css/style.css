@@ -3,7 +3,6 @@
 body {
     background-color: black;
     color: #e9e9e9;
-    font-family: 'Roboto', sans-serif;
     overflow-x: hidden;
 }
 
@@ -354,7 +353,6 @@ div.content>p {
     overflow: hidden;
 }
 
-
 div.content::before {
     content: "Voir plus";
     position: absolute;
@@ -364,8 +362,16 @@ div.content::before {
     background: linear-gradient(90deg, #e9e9e900, black 50px);
 }
 
+div.content.short_com::before {
+    content: "";
+}
+
 div.content.opened::before {
     content: "Voir moins";
+}
+
+div.responses_com {
+    margin-left: 5%;
 }
 
 /* loader */

@@ -90,7 +90,6 @@ function activateSendComment() {
     const commentContent = document.getElementById('comment_content');
     addComment?.addEventListener('click', async () => {
         const comment = commentContent.value;
-        console.log(comment)
         const response = await fetch('/cinetech/movies/addcomment/' + idMovie, {
             method: 'POST',
             headers: {
@@ -119,10 +118,11 @@ async function displayComment() {
     const localComments = await getData('/cinetech/movies/getcomments/' + idMovie);
     localComments.forEach(comment => {
         comments.push({ "id": comment.id_com, "author": comment.firstname, "content": comment.content })
-    })
+    });
+
+    let commentIds = [];
 
     comments.forEach(comment => {
-        console.log(comment)
         commentDiv.innerHTML += (
             `<div class="comment_div">
                 <div class="author_content">
@@ -131,7 +131,7 @@ async function displayComment() {
                     </div>
                     <div class="content">
                         <p class="content_com">${comment.content}</p>
-                </div>
+                    </div>
                 </div>
                 <div class="comment_response">
                     <button class="res_to_comment" id="res_but_${comment.id}">Répondre</button>
@@ -140,20 +140,56 @@ async function displayComment() {
                         <input type="hidden" name="item_type" value="movie">
                         <textarea name="content_mes" id="content_mes" cols="30" rows="10"></textarea>
                         <input type="submit" value="Envoyer">
+                        <input type="button" value="Afficher les réponses">
                     </form>
+                <div id="responses_${comment.id}" class="responses_com"></div>
+            </div>`
+        )
+        commentIds.push(comment.id);
+    })
+    for (let id of commentIds) {
+       await displayResponsesToCom(id);
+    }
+    activateSeeMore();
+}
+
+async function getResponsesToCom(idComment) {
+    const responses = await getData('/cinetech/movies/getresponsestocom/' + idComment);
+    return responses;
+}
+
+async function displayResponsesToCom(idComment) {
+    const responsesDiv = document.querySelector('#responses_' + idComment);
+    const responses = await getResponsesToCom(idComment);
+
+    responses.forEach(response => {
+        responsesDiv.innerHTML += (
+            `<div class="response_div">
+                <div class="author_content">
+                    <div class="author">
+                        <p class="content_author">${response.firstname}</p>
+                    </div>
+                    <div class="content">
+                        <p class="content_com">${response.content}</p>
+                    </div>
                 </div>
             </div>`
         )
     })
-    activateSeeMore();
 }
 
+
 function activateSeeMore() {
-    const contentComs = document.querySelectorAll('.content');
-    contentComs.forEach(content => {
-        content.addEventListener('click', () => {
-            content.classList.toggle('opened');
-        })
+    const content = document.querySelectorAll('.content');
+    content.forEach(comment => {
+        const lengtCom = comment.querySelector('.content_com').innerText.length
+        if (lengtCom < 310) {
+            comment.classList.add('short_com');
+        } else {
+            comment.addEventListener('click', () => {
+                comment.classList.toggle('opened');
+            })
+        }
     })
 }
 

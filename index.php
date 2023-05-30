@@ -118,6 +118,11 @@ use App\Model\CommentModel;
     );
   });
 
+  $router->map('GET', '/movies/getresponsestocom/[a:id]', function ($id) {
+    $commentController = new CommentController();
+    $commentController->getResponseToCom($id);
+  });
+
   // match current request url
   $match = $router->match();
   // call closure or throw 404 status
