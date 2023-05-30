@@ -245,7 +245,11 @@ function activateSendResponse() {
 async function displayRecommendations() {
     const reco = await getData("https://api.themoviedb.org/3/tv/" + idTv + "/recommendations?language=fr-FR");
 
+    console.log(reco)
     const recoDiv = document.getElementById('reco_div');
+    if (reco.total_results > 0) {
+        recoDiv.innerHTML = `<h2>Recommandations</h2>`;
+    }
 
     recoDiv.innerHTML = `<h2>Recommandations</h2>`;
     reco.results.forEach(tv => {

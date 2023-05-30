@@ -246,11 +246,16 @@ async function displayRecommendations() {
     const reco = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "/recommendations?language=fr-FR");
 
     const recoDiv = document.getElementById('reco_div');
+    if (reco.total_results > 0) {
+        recoDiv.innerHTML = `<h2>Recommandations</h2>`;
+    }
 
-    recoDiv.innerHTML = `<h2>Recommandations</h2>`;
+    const recoContainer = document.createElement('div');
+    recoContainer.id = 'reco_container';
+    
     reco.results.forEach(movie => {
         if (movie.poster_path !== null) {
-            recoDiv.innerHTML += (
+            recoContainer.innerHTML += (
                 `<div class="reco_movie">
                     <a href="/cinetech/movies/${movie.id}">
                         <img src="https://image.tmdb.org/t/p/w154/${movie.poster_path}">
@@ -259,6 +264,7 @@ async function displayRecommendations() {
             )
         }
     })
+    recoDiv.appendChild(recoContainer);
 }
 
 async function displayContent() {
