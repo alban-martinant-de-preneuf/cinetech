@@ -62,4 +62,10 @@ class CommentController
             header("HTTP/1.1 400 No user connected");
         }
     }
+
+    public function getResponseToCom($id) {
+        $commentModel = new CommentModel();
+        $responses = $commentModel->getResponseToCom($id);
+        echo json_encode($responses);
+    }
 }

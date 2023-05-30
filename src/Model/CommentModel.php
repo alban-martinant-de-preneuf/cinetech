@@ -79,4 +79,18 @@ class CommentModel {
         ]);
     }
 
+    public function getResponseToCom($id) {
+        $db = DbConnection::getDb();
+        $sql_request = (
+            'SELECT firstname, content
+            FROM comment
+            INNER JOIN user ON comment.id_user = user.id_user
+            WHERE id_par = :id'
+            );
+        $statement = $db->prepare($sql_request);
+        $statement->execute(['id' => $id]);
+        $results = $statement->fetchAll(\PDO ::FETCH_ASSOC);
+        return $results;
+    }
+
 }
