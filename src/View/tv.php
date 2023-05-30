@@ -16,18 +16,24 @@
 
     <main>
         <div id="main_container">
-            <div id="tv_div"></div>
-            <?php if (isset($_SESSION['user'])) : ?>
-                <div id="tv_btns">
-                    <button id="favorite_btn"></button>
-                    <textarea name="comment" id="comment_content"></textarea>
-                    <button id="add_comment">Commenter</button>
-                </div>
-            <?php endif; ?>
-            <div id="comment_div"></div>
-            <div id="reco_div"></div>
+            <div id="tv_div">
+                <div id="details_div"></div>
+                <?php if (isset($_SESSION['user'])) : ?>
+                    <div id="tv_btns">
+                        <button id="favorite_btn"></button>
+                        <button id="comment_btn">Ajouter un commentaire</button>
+                    </div>
+                    <div id="form_comment_div">
+                        <textarea name="comment" id="comment_content"></textarea>
+                        <button id="add_comment">Evoyer</button>
+                    </div>
+                <?php endif; ?>
+                <div id="comments_div"></div>
+                <div id="reco_div"></div>
+            </div>
         </div>
     </main>
+
 
 </body>
 </html>

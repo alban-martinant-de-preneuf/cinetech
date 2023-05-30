@@ -118,7 +118,22 @@ use App\Model\CommentModel;
     );
   });
 
+  $router->map('POST', '/tvs/restocom/[i:id]', function ($id) {
+    $commentController = new CommentController();
+    $commentController->addResToCom(
+      $id,
+      $_POST['id_parent'],
+      $_POST['content_mes'],
+      $_POST['item_type']
+    );
+  });
+
   $router->map('GET', '/movies/getresponsestocom/[a:id]', function ($id) {
+    $commentController = new CommentController();
+    $commentController->getResponseToCom($id);
+  });
+
+  $router->map('GET', '/tvs/getresponsestocom/[a:id]', function ($id) {
     $commentController = new CommentController();
     $commentController->getResponseToCom($id);
   });
