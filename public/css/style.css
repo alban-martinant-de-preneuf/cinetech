@@ -273,23 +273,27 @@ div#details_div img {
     margin: auto;
 }
 
-div.movie_details {
+div.movie_details,
+div.tv_details {
     text-align: left;
 }
 
-span.movie_details_item {
+span.movie_details_item,
+span.tv_details_item {
     font-weight: bold;
     color: #e9e9e980;
 }
 
 div.movie_details h2,
-div#comments_div h2 {
+div#comments_div h2,
+div.tv_details h2 {
     font-size: 1.5em;
     font-weight: bold;
     margin-top: 5%;
 }
 
-div.movie_details h5 {
+div.movie_details h5
+div.tv_details h5 {
     font-size: 0.9em;
     color: #e9e9e980;
 }

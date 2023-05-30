@@ -21,7 +21,7 @@ async function displayTv() {
             <img src="https://image.tmdb.org/t/p/w342/${tv.poster_path}">
         </div>
         <div class="tv_details">
-            <h2>${tv.title}</h2>
+            <h2>${tv.name}</h2>
             <h5>${tv.tagline}</h5>
             <p><span class="tv_details_item">Genre(s) :</span> ${genres}</p>
             <p><span class="tv_details_item">Avec :</span> ${credits.cast.slice(0, 5).map(actor => actor.name).join(', ')}</p>
