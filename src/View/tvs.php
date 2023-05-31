@@ -19,15 +19,15 @@
     <main>
         <h1>Les series</h1>
         <div class="pagination">
-            <button class="previous">précédent</button>
-            <button class="next">suivant</button>
+            <button class="previous red">précédent</button>
+            <button class="next red">suivant</button>
         </div>
 
         <div id="main_container"></div>
 
         <div class="pagination">
-            <button class="previous">précédent</button>
-            <button class="next">suivant</button>
+            <button class="previous red">précédent</button>
+            <button class="next red">suivant</button>
         </div>
     </main>
 

@@ -1,27 +1,32 @@
 import { getData, loader } from "./modules/module.js";
 
-function getIdMovie() {
+function getId() {
     const currentURI = window.location.pathname;
     const parts = currentURI.split('/');
-    const idMovie = parts.pop();
-    return idMovie
+    const id = parts.pop();
+    const type = parts.pop();
+    return [ type, id ]
 }
 
-const idMovie = getIdMovie();
+const idItem = getId()[1];
+const typeItemPlur = getId()[0];
+const typeItemSing = typeItemPlur.slice(0, -1);
 
 async function displayMovie() {
     const detailsDiv = document.getElementById('details_div')
-    const movie = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "?language=fr-FR");
-    const credits = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "/credits?language=fr-FR");
+    const movie = await getData("https://api.themoviedb.org/3/" + typeItemSing + "/" + idItem + "?language=fr-FR");
+    const credits = await getData("https://api.themoviedb.org/3/" + typeItemSing + "/" + idItem + "/credits?language=fr-FR");
 
     const genres = movie.genres.map(genre => genre.name).join(', ');
+
+    const title = typeItemSing === 'movie' ? movie.title : movie.name;
 
     detailsDiv.innerHTML = (
         `<div class="image">
             <img src="https://image.tmdb.org/t/p/w342/${movie.poster_path}">
         </div>
         <div class="movie_details">
-            <h2>${movie.title}</h2>
+            <h2>${title}</h2>
             <h5>${movie.tagline}</h5>
             <p><span class="movie_details_item">Genre(s) :</span> ${genres}</p>
             <p><span class="movie_details_item">Avec :</span> ${credits.cast.slice(0, 5).map(actor => actor.name).join(', ')}</p>
@@ -33,7 +38,7 @@ async function displayMovie() {
 
 function activateRemoveFavorite(favoriteBtn) {
     favoriteBtn?.addEventListener('click', () => {
-        fetch('/cinetech/favorites/removemovie/' + idMovie)
+        fetch('/cinetech/favorites/remove' + typeItemSing + '/' + idItem)
             .then(response => {
                 if (response.ok) {
                     window.location.reload();
@@ -46,7 +51,7 @@ function activateRemoveFavorite(favoriteBtn) {
 
 function activateAddToFavorite(favoriteBtn) {
     favoriteBtn?.addEventListener('click', () => {
-        fetch('/cinetech/favorites/addMovie/' + idMovie)
+        fetch('/cinetech/favorites/addMovie/' + idItem)
             .then(response => {
                 if (response.ok) {
                     window.location.reload();
@@ -63,7 +68,7 @@ async function activateFavorite() {
 
     const response = await fetch('/cinetech/favoriteslist')
     const userFavorites = await response.json();
-    if (userFavorites.movies.includes(parseInt(idMovie))) {
+    if (userFavorites.movies.includes(parseInt(idItem))) {
         favoriteBtn.append('Retirer des favoris')
         activateRemoveFavorite(favoriteBtn);
     } else {
@@ -90,7 +95,7 @@ function activateSendComment() {
     const commentContent = document.getElementById('comment_content');
     addComment?.addEventListener('click', async () => {
         const comment = commentContent.value;
-        const response = await fetch('/cinetech/movies/addcomment/' + idMovie, {
+        const response = await fetch('/cinetech/' + movies + '/addcomment/' + idItem, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -110,12 +115,12 @@ async function displayComment() {
     commentDiv.appendChild(document.createElement('h2')).append('Commentaires');
     const comments = []
 
-    const apiComments = await getData('https://api.themoviedb.org/3/movie/' + idMovie + '/reviews?language=en-US&page=1')
+    const apiComments = await getData('https://api.themoviedb.org/3/' + typeItemSing + '/' + idItem + '/reviews?language=en-US&page=1')
     apiComments.results.forEach(comment => {
         comments.push({ "id": comment.id, "author": comment.author, "content": comment.content })
     });
 
-    const localComments = await getData('/cinetech/movies/getcomments/' + idMovie);
+    const localComments = await getData('/cinetech/' + typeItemPlur + '/getcomments/' + idItem);
     localComments.forEach(comment => {
         comments.push({ "id": comment.id_com, "author": comment.firstname, "content": comment.content })
     });
@@ -154,7 +159,7 @@ async function displayComment() {
 }
 
 async function getResponsesToCom(idComment) {
-    const responses = await getData('/cinetech/movies/getresponsestocom/' + idComment);
+    const responses = await getData('/cinetech/' + typeItemPlur + '/getresponsestocom/' + idComment);
     return responses;
 }
 
@@ -229,7 +234,7 @@ function activateSendResponse() {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const data = new FormData(form);
-            const response = await fetch('/cinetech/movies/restocom/' + idMovie, {
+            const response = await fetch('/cinetech/' + typeItemPlur + '/restocom/' + idItem, {
                 method: 'POST',
                 body: data
             })
@@ -243,7 +248,7 @@ function activateSendResponse() {
 }
 
 async function displayRecommendations() {
-    const reco = await getData("https://api.themoviedb.org/3/movie/" + idMovie + "/recommendations?language=fr-FR");
+    const reco = await getData("https://api.themoviedb.org/3/" + typeItemSing + "/" + idItem + "/recommendations?language=fr-FR");
 
     const recoDiv = document.getElementById('reco_div');
     if (reco.total_results > 0) {
@@ -257,7 +262,7 @@ async function displayRecommendations() {
         if (movie.poster_path !== null) {
             recoContainer.innerHTML += (
                 `<div class="reco_movie">
-                    <a href="/cinetech/movies/${movie.id}">
+                    <a href="/cinetech/${typeItemPlur}/${movie.id}">
                         <img src="https://image.tmdb.org/t/p/w154/${movie.poster_path}">
                     </a>
                 </div>`
