@@ -51,7 +51,7 @@ function formSignIn() {
   form.innerHTML = (
     `<div id="form_connection" class="auth_div">
       <div class="window_title">
-        <h4>Se connecter</h4>      
+        <h4>S'inscrire</h4>      
         <button id="close">X</button>
         <hr>
       </div>

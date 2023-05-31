@@ -1,6 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'); */
+
+@import url('https://fonts.googleapis.com/css2?family=Aoboshi+One&display=swap');
+
 
 body {
+    font-family: 'Aoboshi One', serif;
     background-color: black;
     color: #e9e9e9;
     overflow-x: hidden;
@@ -35,22 +39,31 @@ form#sign_in_form {
 }
 
 div.auth_div button {
+    background-color: #c92229;
     border: none;
-    background-color: transparent;
-    color: black;
+    color: #e9e9e9;
     cursor: pointer;
-    border: black 1px solid;
+    height: 25px;
 }
 
 div.auth_div button:hover {
-    color: #b90000;
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: #e9e9e9;
+    color: #c92229;
+    border: 1px solid #c92229;
+}
+
+div#form_connection input {
+    margin-bottom: 5px;
+    background-color: #113;
+    border: 1px solid #e9e9e9;
+    height: 25px;
+    color: aliceblue;
 }
 
 div.form_bottom button {
     border: none;
     background-color: transparent;
-    color: black;
+    color: #e9e9e9;
     cursor: pointer;
     text-decoration: underline;
     font-size: inherit;
@@ -59,7 +72,7 @@ div.form_bottom button {
 div.form_bottom button:hover {
     color: #b90000;
     background-color: transparent;
-
+    border: none;
 }
 
 div#form_connection_container {
@@ -76,21 +89,25 @@ div#form_connection {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    background-color: antiquewhite;
-    padding: 5%;
-    color: black;
-    border-radius: 2%;
+    background-color: black;
+    padding: 25px;
+    color: #e9e9e9;
+    border-radius: 2px;
+    border: 1px solid #e9e9e9;
 }
 
 div#error {
     color: red;
+    margin: 10px;
 }
 
 #close {
     position: absolute;
     top: 0;
     right: 0;
-    margin: 2%
+    margin: 2%;
+    width: 20px;
+    height: 20px;
 }
 
 div.form_bottom {
@@ -117,7 +134,8 @@ input#search {
 }
 
 input#search.active {
-    width: 150px;
+    font-size: 1.2em;
+    width: 170px;
     padding-left: 5px;
     color: #e9e9e9;
     transition: all 0.5s ease-in-out;
@@ -137,6 +155,7 @@ div#search_results ul {
 
 div#magnifying {
     cursor: pointer;
+    font-size: 1.5em;
 }
 
 /* home */
@@ -239,7 +258,7 @@ ul#list-menu {
     position: absolute;
     padding: 5%;
     right: -10%;
-    top: 30px;
+    top: 35px;
     width: 0px;
     background-color: black;
     color: #e9e9e9;
@@ -257,7 +276,7 @@ ul#list-menu.open {
 
 #list-menu a:hover {
     color: #b90000;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 
 /* details */
@@ -278,6 +297,9 @@ div#details_div img {
 div.movie_details,
 div.tv_details {
     text-align: left;
+    margin: 5%;
+    font-size: 1.5em;
+    line-height: 150%;
 }
 
 span.movie_details_item,
@@ -310,6 +332,7 @@ div#form_comment_div {
 div#reco_container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
 }
 
 div.movies_div {
@@ -327,8 +350,8 @@ form.response_form.hidden {
 }
 
 div#comments_div {
-    margin-top: 5%;
-    margin-bottom: 5%;
+    margin: 5%;
+    font-size: 1.2em;
 }
 
 div#comment_div {
@@ -505,6 +528,7 @@ div.responses_com {
 div.pagination {
     display: flex;
     justify-content: space-between;
+    margin: 2% 5%;
 }
 
 button.red,
@@ -529,11 +553,20 @@ button.red:hover {
     font-size: 1.6em;
 }
 
-@media screen and (max-width: 1200px) and (min-width: 700px) {
-
-}
+@media screen and (max-width: 1200px) and (min-width: 700px) {}
 
 @media screen and (min-width: 1200px) {
+
+    div.movie_details,
+    div.tv_details {
+        margin-right: 0 5% 0 0;
+    }
+
+    div#menu {
+        display: flex;
+        align-items: center;
+    }
+
 
     div#details_div {
         flex-direction: row;
