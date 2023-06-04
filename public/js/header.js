@@ -220,11 +220,18 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// function to clear the div
+function clearDiv(div)  {
+  while (div.firstChild) {
+    div.removeChild(div.firstChild);
+  }
+}
+
 // function to fetch data from the API
 function search() {
   searchInput.addEventListener('input', async (e) => {
     const searchValue = e.target.value;
-    searchResults.innerHTML = '';
+    clearDiv(searchResults);
     if (searchValue.length > 2) {
       const movies = await getData("https://api.themoviedb.org/3/search/multi?language=fr-FR&query=" + searchValue);
       console.log(movies)

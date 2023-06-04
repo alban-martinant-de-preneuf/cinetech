@@ -51,7 +51,7 @@ function activateRemoveFavorite(favoriteBtn) {
 
 function activateAddToFavorite(favoriteBtn) {
     favoriteBtn?.addEventListener('click', () => {
-        fetch('/cinetech/favorites/addMovie/' + idItem)
+        fetch('/cinetech/favorites/add' + typeItemSing + '/' + idItem)
             .then(response => {
                 if (response.ok) {
                     window.location.reload();
@@ -68,7 +68,7 @@ async function activateFavorite() {
 
     const response = await fetch('/cinetech/favoriteslist')
     const userFavorites = await response.json();
-    if (userFavorites.movies.includes(parseInt(idItem))) {
+    if (userFavorites[typeItemPlur].includes(parseInt(idItem))) {
         favoriteBtn.append('Retirer des favoris')
         activateRemoveFavorite(favoriteBtn);
     } else {

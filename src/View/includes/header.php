@@ -25,8 +25,10 @@
     </div>
     </div>
     <div class="bottom">
-        <div id="magnifying"><i class="fa-solid fa-magnifying-glass"></i></div>
-        <input type="search" name="search" id="search">
+        <div id="search_div">
+            <div id="magnifying"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <input type="search" name="search" id="search">
+        </div>
         <div>
             <div id="search_results"></div>
         </div>

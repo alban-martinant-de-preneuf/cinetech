@@ -555,7 +555,13 @@ button.red:hover {
     font-size: 1.6em;
 }
 
-@media screen and (max-width: 1200px) and (min-width: 700px) {}
+@media screen and (max-width: 1200px) and (min-width: 700px) {
+    div#search_div {
+        position: absolute;
+        top: 12px;
+        left: 320px;
+    }
+}
 
 @media screen and (min-width: 1200px) {
 

@@ -78,12 +78,12 @@ use App\Model\CommentModel;
     $userController->getFavorites();
   });
 
-  $router->map('GET', '/favorites/addMovie/[i:id]', function ($id) {
+  $router->map('GET', '/favorites/addmovie/[i:id]', function ($id) {
     $userController = new UserController();
     $userController->addFavoriteMovie($id);
   });
 
-  $router->map('GET', '/favorites/addTv/[i:id]', function ($id) {
+  $router->map('GET', '/favorites/addtv/[i:id]', function ($id) {
     $userController = new UserController();
     $userController->addFavoriteTv($id);
   });
