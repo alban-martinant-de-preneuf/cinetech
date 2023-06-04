@@ -77,4 +77,9 @@ class UserController
             }
         }
     }
+
+    public function isConnected()
+    {
+        return isset($_SESSION['user']) ? true : false;
+    }
 }

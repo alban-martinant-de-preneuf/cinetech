@@ -128,6 +128,11 @@ use App\Model\CommentModel;
     );
   });
 
+  $router->map('GET', '/user/isconnected', function () {
+    $userController = new UserController();
+    $userController->isConnected();
+  });
+
   $router->map('GET', '/movies/getresponsestocom/[a:id]', function ($id) {
     $commentController = new CommentController();
     $commentController->getResponseToCom($id);
