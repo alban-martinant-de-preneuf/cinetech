@@ -17,7 +17,6 @@ class AuthController
             }
             $arg = htmlspecialchars($arg);
         }
-        $userModel = new UserModel();
         if ($password !== $password2) {
             header("HTTP/1.1 400 Passwords don't match");
             die();
@@ -26,6 +25,7 @@ class AuthController
             header("HTTP/1.1 400 Invalid email");
             die();
         }
+        $userModel = new UserModel();
         if ($userModel->getUser($email)) {
             header("HTTP/1.1 400 Email already exists");
             die();
@@ -48,7 +48,6 @@ class AuthController
         $user = $userModel->getUser($email);
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user'] = $user;
-            var_dump($_SESSION['user']);
             header("HTTP/1.1 200 OK");
             die();
         } else {

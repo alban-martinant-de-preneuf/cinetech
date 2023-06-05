@@ -7,11 +7,9 @@ class UserModel
     public function register($firstname, $lastname, $email, $password)
     {
         $db = DbConnection::getDb();
-        var_dump($db);
         $sql_request = ("INSERT INTO user (firstname, lastname, email, password)
             VALUES (:firstname, :lastname, :email, :password)"
         );
-        var_dump($sql_request);
         $statement = $db->prepare($sql_request);
         $statement->execute([
             ':firstname' => $firstname,
