@@ -14,16 +14,15 @@ async function getContent() {
     moviesDiv.classList.add('fav_movies_div', 'flex_wrap');
 
     for (let idMovie of favorites.movies) {
-        console.log(idMovie);
         const movie = await getData(`https://api.themoviedb.org/3/movie/${idMovie}?language=fr-FR`);
-        console.log(movie);
         moviesDiv.innerHTML += (`
-            <div class="item_div">
+            <div class="item_div fav">
                 <a href="/cinetech/movies/${movie.id}">
                     <div class="image_container">
                         <img src="https://image.tmdb.org/t/p/w185/${movie.poster_path}">
                     </div>
                 </a>
+                <button class="remove_fav" id="remove_movie_${movie.id}">X</button>
             </div>
         `)
     }
@@ -37,12 +36,13 @@ async function getContent() {
     for (let idTv of favorites.tvs) {
         const tv = await getData(`https://api.themoviedb.org/3/tv/${idTv}?language=fr-FR`);
         tvsDiv.innerHTML += (`
-            <div class="item_div">
+            <div class="item_div fav">
                 <a href="/cinetech/tvs/${tv.id}">
                     <div class="image_container">
                         <img src="https://image.tmdb.org/t/p/w185/${tv.poster_path}">
                     </div>
                 </a>
+                <button class="remove_fav" id="remove_tv_${tv.id}">X</button>
             </div>
         `)
     }
@@ -52,8 +52,25 @@ async function getContent() {
 }
 
 loader();
-getContent().then(content => {
-    mainContainer.appendChild(content);
-    document.getElementById('loader')?.remove();
-});
+getContent()
+    .then(content => {
+        mainContainer.appendChild(content);
+        document.getElementById('loader')?.remove();
+    })
+    .then(() => {
+        const removeFavBtns = document.querySelectorAll('.remove_fav');
+
+        removeFavBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const id = btn.id.split('_')[2];
+                const type = btn.id.split('_')[1];
+                fetch(`/cinetech/favorites/remove${type}/${id}`)
+                    .then(() => {
+                        btn.parentElement.remove();
+                    })
+            })
+        })
+    })
+
 

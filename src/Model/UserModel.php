@@ -17,6 +17,21 @@ class UserModel
             ':email' => $email,
             ':password' => $password
         ]);
+        // create favorite list
+        $userId = $db->lastInsertId();
+        $this->createFavoriteList($userId);
+    }
+
+    public function createFavoriteList($userId)
+    {
+        $db = DbConnection::getDb();
+        $sql_request = ("INSERT INTO favorite (id_user)
+            VALUES (:id_user)"
+        );
+        $statement = $db->prepare($sql_request);
+        $statement->execute([
+            ':id_user' => $userId
+        ]);
     }
 
     public function getUser($email)
