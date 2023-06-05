@@ -168,6 +168,11 @@ div#magnifying {
     font-size: 1.5em;
 }
 
+div#search_results li:hover {
+    color: #c92229;
+    padding-bottom: 3px;
+}
+
 /* home */
 
 div.popular_div {
