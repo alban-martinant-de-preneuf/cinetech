@@ -59,7 +59,6 @@ use App\Model\CommentModel;
 
   $router->map('POST', '/register', function () {
     $authController = new AuthController();
-    var_dump($_POST);
     $authController->register($_POST['firstname'], $_POST['lastname'], $_POST['email'], $_POST['password'], $_POST['password2']);
   });
 

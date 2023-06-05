@@ -40,14 +40,26 @@ function displayContent(page) {
     })
 }
 
+function displayPreviousBtn(previousBtns, page) {
+    previousBtns.forEach(button => {
+        if (page === 1) {
+            button.style.visibility = 'hidden';
+        } else {
+            button.style.visibility = 'visible';
+        }
+    });
+}
+
 function pagination(page) {
     const previous = document.querySelectorAll('.previous');
     const next = document.querySelectorAll('.next');
+    displayPreviousBtn(previous, page);
     previous.forEach(button => {
         button.addEventListener('click', () => {
             if (page > 1) {
                 page--;
                 displayContent(page);
+                displayPreviousBtn(previous, page);
             }
         })
     });
@@ -55,6 +67,7 @@ function pagination(page) {
         button.addEventListener('click', () => {
             page++;
             displayContent(page);
+            displayPreviousBtn(previous, page);
         })
     });
 }

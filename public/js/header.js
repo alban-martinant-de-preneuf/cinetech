@@ -163,24 +163,23 @@ const searchResults = document.getElementById('search_results');
 function displayResults(results) {
   const ul = document.createElement('ul');
   results.forEach(result => {
+    const li = document.createElement('li');
     if (result.media_type === 'movie') {
-      ul.innerHTML += (
-        `<li>Film : 
-            <a href="/cinetech/movies/${result.id}">
-              ${result.title}
-            </a>
-        </li>`
-      )
+      li.append('Film : ');
+      const a = document.createElement('a');
+      a.href = `/cinetech/movies/${result.id}`;
+      a.append(result.title);
+      li.appendChild(a);
     } else if (result.media_type === 'tv') {
-      ul.innerHTML += (
-        `<li>Série : 
-            <a href="/cinetech/tvs/${result.id}">
-              ${result.name}
-            </a>
-        </li>`
-      )
+      li.append('Série : ');
+      const a = document.createElement('a');
+      a.href = `/cinetech/tvs/${result.id}`;
+      a.append(result.name);
+      li.appendChild(a);
     }
+    ul.appendChild(li);
   })
+  clearDiv(searchResults);
   searchResults.appendChild(ul);
 }
 
@@ -231,10 +230,8 @@ function clearDiv(div)  {
 function search() {
   searchInput.addEventListener('input', async (e) => {
     const searchValue = e.target.value;
-    clearDiv(searchResults);
     if (searchValue.length > 2) {
       const movies = await getData("https://api.themoviedb.org/3/search/multi?language=fr-FR&query=" + searchValue);
-      console.log(movies)
       displayResults(movies.results);
     }
   })
