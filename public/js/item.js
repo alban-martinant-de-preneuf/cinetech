@@ -111,11 +111,15 @@ function activateSendComment() {
 }
 
 async function displayComment() {
-    const commentDiv = document.getElementById('comments_div');
-    commentDiv.appendChild(document.createElement('h2')).append('Commentaires');
+    const commentsDiv = document.getElementById('comments_div');
+    commentsDiv.appendChild(document.createElement('h2')).append('Commentaires');
     const comments = []
 
     const apiComments = await getData('https://api.themoviedb.org/3/' + typeItemSing + '/' + idItem + '/reviews?language=en-US&page=1')
+    console.log(apiComments.results);
+    if (apiComments.results.length === 0) {
+        commentsDiv.appendChild(document.createElement('p')).append('Aucun commentaire pour le moment');
+    }
     apiComments.results.forEach(comment => {
         comments.push({ "id": comment.id, "author": comment.author, "content": comment.content })
     });
@@ -128,7 +132,7 @@ async function displayComment() {
     let commentIds = [];
 
     comments.forEach(comment => {
-        commentDiv.innerHTML += (
+        commentsDiv.innerHTML += (
             `<div class="comment_div">
                 <div class="author_content">
                     <div class="author">
@@ -139,19 +143,29 @@ async function displayComment() {
                     </div>
                 </div>
                 <div class="comment_response">
-                <button class="res_to_comment" id="res_but_${comment.id}">Répondre</button>
-                <button class="display_res_but" id="display_${comment.id}">Afficher les réponses</button>
+                <button class="res_to_comment red small_btn" id="res_but_${comment.id}">Répondre</button>
+                <button class="display_res_but red small_btn" id="display_${comment.id}">Afficher les réponses</button>
                     <form action="" method="POST" class="response_form hidden" id="form_res_${comment.id}">
                         <input type="hidden" name="id_parent" value=${comment.id}>
                         <input type="hidden" name="item_type" value="movie">
-                        <textarea name="content_mes" id="content_mes" cols="30" rows="10"></textarea>
-                        <input type="submit" value="Envoyer">
+                        <textarea name="content_mes" id="content_mes" rows="10"></textarea>
+                        <button type="submit" class="red small_btn">Envoyer</button>
                     </form>
                 <div id="responses_${comment.id}" class="responses_com"></div>
             </div>`
         )
         commentIds.push(comment.id);
     })
+
+    const userConnected = await getData('/cinetech/user/isconnected');
+    console.log(userConnected);
+    if (userConnected) {
+        const responseBtns = document.querySelectorAll('.res_to_comment');
+        responseBtns.forEach(btn => {
+            btn.style.display = 'inline-block';
+        })
+    }
+
     for (let id of commentIds) {
        await displayResponsesToCom(id);
     }
