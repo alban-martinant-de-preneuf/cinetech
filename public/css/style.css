@@ -38,7 +38,8 @@ form#sign_in_form {
     flex-direction: column;
 }
 
-div.auth_div button {
+div.auth_div button,
+div.item_div button {
     background-color: #c92229;
     border: none;
     color: #e9e9e9;
@@ -46,7 +47,12 @@ div.auth_div button {
     height: 25px;
 }
 
-div.auth_div button:hover {
+div.item_div button {
+    width: 25px;
+}
+
+div.auth_div button:hover,
+div.item_div button:hover {
     background-color: #e9e9e9;
     color: #c92229;
     border: 1px solid #c92229;
@@ -352,6 +358,18 @@ div.image_container {
 div#movie_btns,
 div#tv_btns {
     margin-left: 5%;
+}
+
+/* favorites */
+
+div.fav {
+    position: relative;
+}
+
+button.remove_fav {
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 
 /* comments */
