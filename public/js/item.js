@@ -95,7 +95,7 @@ function activateSendComment() {
     const commentContent = document.getElementById('comment_content');
     addComment?.addEventListener('click', async () => {
         const comment = commentContent.value;
-        const response = await fetch('/cinetech/' + movies + '/addcomment/' + idItem, {
+        const response = await fetch('/cinetech/' + typeItemPlur + '/addcomment/' + idItem, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
