@@ -22,12 +22,12 @@
                 <div id="details_div"></div>
                 <?php if (isset($_SESSION['user'])) : ?>
                     <div id="movie_btns">
-                        <button id="favorite_btn"></button>
-                        <button id="comment_btn">Ajouter un commentaire</button>
+                        <button id="favorite_btn" class="red small_btn"></button>
+                        <button id="comment_btn" class="red small_btn">Ajouter un commentaire</button>
                     </div>
                     <div id="form_comment_div">
-                        <textarea name="comment" id="comment_content"></textarea>
-                        <button id="add_comment">Evoyer</button>
+                        <textarea name="comment" id="comment_content" rows="10"></textarea>
+                        <button id="add_comment" class="red small_btn">Evoyer</button>
                     </div>
                 <?php endif; ?>
                 <div id="comments_div"></div>

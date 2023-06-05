@@ -80,6 +80,6 @@ class UserController
 
     public function isConnected()
     {
-        return isset($_SESSION['user']) ? true : false;
+        echo isset($_SESSION['user']) ? 'true' : 'false';
     }
 }
