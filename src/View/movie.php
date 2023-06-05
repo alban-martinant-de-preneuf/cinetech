@@ -27,7 +27,7 @@
                     </div>
                     <div id="form_comment_div">
                         <textarea name="comment" id="comment_content" rows="10"></textarea>
-                        <button id="add_comment" class="red small_btn">Evoyer</button>
+                        <button id="add_comment" class="red small_btn">Envoyer</button>
                     </div>
                 <?php endif; ?>
                 <div id="comments_div"></div>
