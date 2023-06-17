@@ -17,7 +17,7 @@ function setSlideToDisplay(imageSize) {
         slideToDisplay = 7;
     } else if (windowWidth > 5 * imageSize + 10) {
         slideToDisplay = 6;
-    } else if (windowWidth > 4 * imageSize + 10 ) {
+    } else if (windowWidth > 4 * imageSize + 10) {
         slideToDisplay = 5
     } else if (windowWidth > 3 * imageSize + 10) {
         slideToDisplay = 4;

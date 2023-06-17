@@ -458,6 +458,10 @@ button.res_to_comment {
     display: none;
 }
 
+p.content_author {
+    padding: 10px;
+}
+
 /* loader */
 
 #loader {
@@ -628,7 +632,7 @@ textarea {
 
     div.movie_details,
     div.tv_details {
-        margin-right: 0 5% 0 0;
+        margin-right: 5%;
     }
 
     div#menu {
