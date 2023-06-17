@@ -5,7 +5,7 @@ function getId() {
     const parts = currentURI.split('/');
     const id = parts.pop();
     const type = parts.pop();
-    return [ type, id ]
+    return [type, id]
 }
 
 const idItem = getId()[1];
@@ -21,19 +21,47 @@ async function displayMovie() {
 
     const title = typeItemSing === 'movie' ? movie.title : movie.name;
 
-    detailsDiv.innerHTML = (
-        `<div class="image">
-            <img src="https://image.tmdb.org/t/p/w342/${movie.poster_path}">
-        </div>
-        <div class="movie_details">
-            <h2>${title}</h2>
-            <h5>${movie.tagline}</h5>
-            <p><span class="movie_details_item">Genre(s) :</span> ${genres}</p>
-            <p><span class="movie_details_item">Avec :</span> ${credits.cast.slice(0, 5).map(actor => actor.name).join(', ')}</p>
-            <p><span class="movie_details_item">note :</span> ${movie.vote_average.toFixed(1)}/10</p>
-            <p><span class="movie_details_item">Résumé :</span> ${movie.overview}</p>
-        </div>`
-    );
+    const imageDiv = document.createElement("div");
+    imageDiv.className = "image";
+
+    const image = document.createElement("img");
+    image.src = `https://image.tmdb.org/t/p/w342/${movie.poster_path}`;
+
+    const movieDetailsDiv = document.createElement("div");
+    movieDetailsDiv.className = "movie_details";
+
+    const titleHeading = document.createElement("h2");
+    titleHeading.textContent = title;
+
+    const taglineHeading = document.createElement("h5");
+    taglineHeading.textContent = movie.tagline;
+
+    const genresParagraph = document.createElement("p");
+    genresParagraph.innerHTML = `<span class="movie_details_item">Genre(s) :</span> ${genres}`;
+
+    const castParagraph = document.createElement("p");
+    const castNames = credits.cast.slice(0, 5).map(actor => actor.name).join(', ');
+    castParagraph.innerHTML = `<span class="movie_details_item">Avec :</span> ${castNames}`;
+
+    const voteAverageParagraph = document.createElement("p");
+    voteAverageParagraph.innerHTML = `<span class="movie_details_item">note :</span> ${movie.vote_average.toFixed(1)}/10`;
+
+    const overviewParagraph = document.createElement("p");
+    overviewParagraph.innerHTML = `<span class="movie_details_item">Résumé :</span> ${movie.overview}`;
+
+    // Construire la structure du DOM
+    imageDiv.appendChild(image);
+    movieDetailsDiv.appendChild(titleHeading);
+    movieDetailsDiv.appendChild(taglineHeading);
+    movieDetailsDiv.appendChild(genresParagraph);
+    movieDetailsDiv.appendChild(castParagraph);
+    movieDetailsDiv.appendChild(voteAverageParagraph);
+    movieDetailsDiv.appendChild(overviewParagraph);
+
+    // Ajouter les éléments au detailsDiv
+    detailsDiv.appendChild(imageDiv);
+    detailsDiv.appendChild(movieDetailsDiv);
+
 }
 
 function activateRemoveFavorite(favoriteBtn) {
@@ -132,28 +160,88 @@ async function displayComment() {
     let commentIds = [];
 
     comments.forEach(comment => {
-        commentsDiv.innerHTML += (
-            `<div class="comment_div">
-                <div class="author_content">
-                    <div class="author">
-                        <p class="content_author">${comment.author}</p>
-                    </div>
-                    <div class="content">
-                        <p class="content_com">${comment.content}</p>
-                    </div>
-                </div>
-                <div class="comment_response">
-                <button class="res_to_comment red small_btn" id="res_but_${comment.id}">Répondre</button>
-                <button class="display_res_but red small_btn" id="display_${comment.id}">Afficher les réponses</button>
-                    <form action="" method="POST" class="response_form hidden" id="form_res_${comment.id}">
-                        <input type="hidden" name="id_parent" value=${comment.id}>
-                        <input type="hidden" name="item_type" value="movie">
-                        <textarea name="content_mes" id="content_mes" rows="10"></textarea>
-                        <button type="submit" class="red small_btn">Envoyer</button>
-                    </form>
-                <div id="responses_${comment.id}" class="responses_com"></div>
-            </div>`
-        )
+        const commentDiv = document.createElement("div");
+        commentDiv.className = "comment_div";
+
+        const authorContentDiv = document.createElement("div");
+        authorContentDiv.className = "author_content";
+
+        const authorDiv = document.createElement("div");
+        authorDiv.className = "author";
+
+        const authorParagraph = document.createElement("p");
+        authorParagraph.className = "content_author";
+        authorParagraph.textContent = comment.author;
+
+        const contentDiv = document.createElement("div");
+        contentDiv.className = "content";
+
+        const contentParagraph = document.createElement("p");
+        contentParagraph.className = "content_com";
+        contentParagraph.textContent = comment.content;
+
+        const commentResponseDiv = document.createElement("div");
+        commentResponseDiv.className = "comment_response";
+
+        const resButton = document.createElement("button");
+        resButton.className = "res_to_comment red small_btn";
+        resButton.id = `res_but_${comment.id}`;
+        resButton.textContent = "Répondre";
+
+        const displayButton = document.createElement("button");
+        displayButton.className = "display_res_but red small_btn";
+        displayButton.id = `display_${comment.id}`;
+        displayButton.textContent = "Afficher les réponses";
+
+        const responseForm = document.createElement("form");
+        responseForm.action = "";
+        responseForm.method = "POST";
+        responseForm.className = "response_form hidden";
+        responseForm.id = `form_res_${comment.id}`;
+
+        const idParentInput = document.createElement("input");
+        idParentInput.type = "hidden";
+        idParentInput.name = "id_parent";
+        idParentInput.value = comment.id;
+
+        const itemTypeInput = document.createElement("input");
+        itemTypeInput.type = "hidden";
+        itemTypeInput.name = "item_type";
+        itemTypeInput.value = "movie";
+
+        const textarea = document.createElement("textarea");
+        textarea.name = "content_mes";
+        textarea.id = "content_mes";
+        textarea.rows = "10";
+
+        const submitButton = document.createElement("button");
+        submitButton.type = "submit";
+        submitButton.className = "red small_btn";
+        submitButton.textContent = "Envoyer";
+
+        const responsesDiv = document.createElement("div");
+        responsesDiv.id = `responses_${comment.id}`;
+        responsesDiv.className = "responses_com";
+
+        // Construire la structure du DOM
+        authorDiv.appendChild(authorParagraph);
+        contentDiv.appendChild(contentParagraph);
+        authorContentDiv.appendChild(authorDiv);
+        authorContentDiv.appendChild(contentDiv);
+        commentResponseDiv.appendChild(resButton);
+        commentResponseDiv.appendChild(displayButton);
+        responseForm.appendChild(idParentInput);
+        responseForm.appendChild(itemTypeInput);
+        responseForm.appendChild(textarea);
+        responseForm.appendChild(submitButton);
+        commentDiv.appendChild(authorContentDiv);
+        commentDiv.appendChild(commentResponseDiv);
+        commentDiv.appendChild(responseForm);
+        commentDiv.appendChild(responsesDiv);
+
+        // Ajouter l'élément commentDiv au parent commentsDiv existant
+        commentsDiv.appendChild(commentDiv);
+
         commentIds.push(comment.id);
     })
 
@@ -167,7 +255,7 @@ async function displayComment() {
     }
 
     for (let id of commentIds) {
-       await displayResponsesToCom(id);
+        await displayResponsesToCom(id);
     }
     activateSeeMore();
 }
@@ -182,18 +270,36 @@ async function displayResponsesToCom(idComment) {
     const responses = await getResponsesToCom(idComment);
 
     responses.forEach(response => {
-        responsesDiv.innerHTML += (
-            `<div class="response_div">
-                <div class="author_content">
-                    <div class="author">
-                        <p class="content_author">${response.firstname}</p>
-                    </div>
-                    <div class="content">
-                        <p class="content_com">${response.content}</p>
-                    </div>
-                </div>
-            </div>`
-        )
+        const responseDiv = document.createElement("div");
+        responseDiv.className = "response_div";
+
+        const authorContentDiv = document.createElement("div");
+        authorContentDiv.className = "author_content";
+
+        const authorDiv = document.createElement("div");
+        authorDiv.className = "author";
+
+        const authorParagraph = document.createElement("p");
+        authorParagraph.className = "content_author";
+        authorParagraph.textContent = response.firstname;
+
+        const contentDiv = document.createElement("div");
+        contentDiv.className = "content";
+
+        const contentParagraph = document.createElement("p");
+        contentParagraph.className = "content_com";
+        contentParagraph.textContent = response.content;
+
+        // Construire la structure du DOM
+        authorDiv.appendChild(authorParagraph);
+        contentDiv.appendChild(contentParagraph);
+        authorContentDiv.appendChild(authorDiv);
+        authorContentDiv.appendChild(contentDiv);
+        responseDiv.appendChild(authorContentDiv);
+
+        // Ajouter l'élément responseDiv au parent responsesDiv existant
+        responsesDiv.appendChild(responseDiv);
+
     })
 }
 
@@ -271,16 +377,22 @@ async function displayRecommendations() {
 
     const recoContainer = document.createElement('div');
     recoContainer.id = 'reco_container';
-    
+
     reco.results.forEach(movie => {
         if (movie.poster_path !== null) {
-            recoContainer.innerHTML += (
-                `<div class="reco_movie">
-                    <a href="/cinetech/${typeItemPlur}/${movie.id}">
-                        <img src="https://image.tmdb.org/t/p/w154/${movie.poster_path}">
-                    </a>
-                </div>`
-            )
+            const recoMovie = document.createElement("div");
+            recoMovie.className = "reco_movie";
+
+            const link = document.createElement("a");
+            link.href = "/cinetech/" + typeItemPlur + "/" + movie.id;
+
+            const image = document.createElement("img");
+            image.src = "https://image.tmdb.org/t/p/w154/" + movie.poster_path;
+
+            link.appendChild(image);
+            recoMovie.appendChild(link);
+
+            recoContainer.appendChild(recoMovie);
         }
     })
     recoDiv.appendChild(recoContainer);

@@ -10,7 +10,7 @@ class AuthController
     public function register($firstname, $lastname, $email, $password, $password2)
     {
         $args = func_get_args();
-        foreach ($args as $arg) {
+        foreach ($args as &$arg) {
             if (empty($arg)) {
                 header("HTTP/1.1 400 Empty field");
                 die();
@@ -37,7 +37,7 @@ class AuthController
     public function login($email, $password)
     {
         $args = func_get_args();
-        foreach ($args as $arg) {
+        foreach ($args as &$arg) {
             if (empty($arg)) {
                 header("HTTP/1.1 400 Empty field");
                 die();

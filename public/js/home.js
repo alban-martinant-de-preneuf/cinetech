@@ -17,7 +17,7 @@ function setSlideToDisplay(imageSize) {
         slideToDisplay = 7;
     } else if (windowWidth > 5 * imageSize + 10) {
         slideToDisplay = 6;
-    } else if (windowWidth > 4 * imageSize + 10 ) {
+    } else if (windowWidth > 4 * imageSize + 10) {
         slideToDisplay = 5
     } else if (windowWidth > 3 * imageSize + 10) {
         slideToDisplay = 4;
@@ -64,15 +64,26 @@ async function getContent(div, request, itemType) {
     carousel.id = 'carousel_' + itemType;
     div.appendChild(carousel);
     for (let item of items) {
-        carousel.innerHTML += (`
-            <div class="carousel_item">
-                <a href="/cinetech/${itemType}/${item.id}">
-                    <div class="image_container">
-                        <img src="https://image.tmdb.org/t/p/w${imageSize}/${item.poster_path}">
-                    </div>
-                </a>
-            </div>
-        `)
+        var carouselItem = document.createElement("div");
+        carouselItem.className = "carousel_item";
+
+        var link = document.createElement("a");
+        link.href = "/cinetech/" + itemType + "/" + item.id;
+
+        var imageContainer = document.createElement("div");
+        imageContainer.className = "image_container";
+
+        var image = document.createElement("img");
+        image.src = "https://image.tmdb.org/t/p/w" + imageSize + "/" + item.poster_path;
+
+        // Ajouter les éléments dans la structure du DOM
+        imageContainer.appendChild(image);
+        link.appendChild(imageContainer);
+        carouselItem.appendChild(link);
+
+        // Ajouter l'élément carouselItem au carousel existant
+        carousel.appendChild(carouselItem);
+
     }
     const carouselItems = carousel.querySelectorAll('.carousel_item');
     console.log(carouselItems);
@@ -108,12 +119,12 @@ async function dislplayContent() {
         popularDivs[0],
         'https://api.themoviedb.org/3/trending/movie/day?language=fr-FR&page=1',
         'movies'
-        );
+    );
     const tvsDiv = await getContent(
         popularDivs[1],
         'https://api.themoviedb.org/3/trending/tv/day?language=fr-FR&page=1',
         'tvs'
-        );
+    );
     const mainContainer = document.getElementById('main_container');
     mainContainer.appendChild(moviesDiv);
     mainContainer.appendChild(tvsDiv);
