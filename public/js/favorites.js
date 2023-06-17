@@ -15,16 +15,33 @@ async function getContent() {
 
     for (let idMovie of favorites.movies) {
         const movie = await getData(`https://api.themoviedb.org/3/movie/${idMovie}?language=fr-FR`);
-        moviesDiv.innerHTML += (`
-            <div class="item_div fav">
-                <a href="/cinetech/movies/${movie.id}">
-                    <div class="image_container">
-                        <img src="https://image.tmdb.org/t/p/w185/${movie.poster_path}">
-                    </div>
-                </a>
-                <button class="remove_fav" id="remove_movie_${movie.id}">X</button>
-            </div>
-        `)
+        
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "item_div fav";
+
+        const link = document.createElement("a");
+        link.href = `/cinetech/movies/${movie.id}`;
+
+        const imageContainerDiv = document.createElement("div");
+        imageContainerDiv.className = "image_container";
+
+        const image = document.createElement("img");
+        image.src = `https://image.tmdb.org/t/p/w185/${movie.poster_path}`;
+
+        const removeButton = document.createElement("button");
+        removeButton.className = "remove_fav";
+        removeButton.id = `remove_movie_${movie.id}`;
+        removeButton.textContent = "X";
+
+        // Construire la structure du DOM
+        imageContainerDiv.appendChild(image);
+        link.appendChild(imageContainerDiv);
+        itemDiv.appendChild(link);
+        itemDiv.appendChild(removeButton);
+
+        // Ajouter l'élément itemDiv au parent moviesDiv existant
+        moviesDiv.appendChild(itemDiv);
+
     }
     favoriteDiv.appendChild(moviesDiv);
 
@@ -35,16 +52,33 @@ async function getContent() {
 
     for (let idTv of favorites.tvs) {
         const tv = await getData(`https://api.themoviedb.org/3/tv/${idTv}?language=fr-FR`);
-        tvsDiv.innerHTML += (`
-            <div class="item_div fav">
-                <a href="/cinetech/tvs/${tv.id}">
-                    <div class="image_container">
-                        <img src="https://image.tmdb.org/t/p/w185/${tv.poster_path}">
-                    </div>
-                </a>
-                <button class="remove_fav" id="remove_tv_${tv.id}">X</button>
-            </div>
-        `)
+
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "item_div fav";
+
+        const link = document.createElement("a");
+        link.href = `/cinetech/tvs/${tv.id}`;
+
+        const imageContainerDiv = document.createElement("div");
+        imageContainerDiv.className = "image_container";
+
+        const image = document.createElement("img");
+        image.src = `https://image.tmdb.org/t/p/w185/${tv.poster_path}`;
+
+        const removeButton = document.createElement("button");
+        removeButton.className = "remove_fav";
+        removeButton.id = `remove_tv_${tv.id}`;
+        removeButton.textContent = "X";
+
+        // Construire la structure du DOM
+        imageContainerDiv.appendChild(image);
+        link.appendChild(imageContainerDiv);
+        itemDiv.appendChild(link);
+        itemDiv.appendChild(removeButton);
+
+        // Ajouter l'élément itemDiv au parent tvsDiv existant
+        tvsDiv.appendChild(itemDiv);
+
     }
     favoriteDiv.appendChild(tvsDiv);
 

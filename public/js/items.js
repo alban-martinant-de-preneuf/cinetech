@@ -13,19 +13,30 @@ async function pageContent(page) {
     const moviesDiv = (document.createElement('div'));
     moviesDiv.classList.add('movies_div', 'flex_wrap');
     const type = getType();
-    const typeSingular = type.substring(0,type.length-1);
-    const result = await getData("https://api.themoviedb.org/3/discover/" + typeSingular + "?language=fr-FR&page=" + page +"&sort_by=popularity.desc")
+    const typeSingular = type.substring(0, type.length - 1);
+    const result = await getData("https://api.themoviedb.org/3/discover/" + typeSingular + "?language=fr-FR&page=" + page + "&sort_by=popularity.desc")
     const items = result.results;
     for (let film of items) {
-        moviesDiv.innerHTML += (`
-            <div class="item_div">
-                <a href="/cinetech/${type}/${film.id}">
-                    <div class="image_container">
-                        <img src="https://image.tmdb.org/t/p/w185/${film.poster_path}">
-                    </div>
-                </a>
-            </div>
-        `)
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "item_div";
+
+        const link = document.createElement("a");
+        link.href = `/cinetech/${type}/${film.id}`;
+
+        const imageContainerDiv = document.createElement("div");
+        imageContainerDiv.className = "image_container";
+
+        const image = document.createElement("img");
+        image.src = `https://image.tmdb.org/t/p/w185/${film.poster_path}`;
+
+        // Construire la structure du DOM
+        imageContainerDiv.appendChild(image);
+        link.appendChild(imageContainerDiv);
+        itemDiv.appendChild(link);
+
+        // Ajouter l'élément itemDiv au parent moviesDiv existant
+        moviesDiv.appendChild(itemDiv);
+
     }
     return moviesDiv;
 }
