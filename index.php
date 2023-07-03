@@ -5,6 +5,7 @@
   use App\Controller\AuthController;
   use App\Controller\UserController;
   use App\Controller\CommentController;
+  use App\Controller\AdminController;
   use App\Model\CommentModel;
 
   session_start();
@@ -50,6 +51,22 @@
   $router->map('GET', '/admin', function () {
     $homeController = new HomeController();
     $homeController->getAdmin();
+  });
+
+  $router->map('GET', '/admin/users', function () {
+    $adminController = new AdminController();
+    $adminController->getUsers();
+  });
+
+  $router->map('POST', '/admin/users/modify/[i:id]', function ($id) {
+    $user = json_decode(file_get_contents('php://input'), true);
+    $adminController = new AdminController();
+    $adminController->modifyUser($id, $user);
+  });
+
+  $router->map('GET', '/admin/users/delete/[i:id]', function ($id) {
+    $adminController = new AdminController();
+    $adminController->deleteUser($id);
   });
 
   $router->map('GET', '/tvs/[i:id]', function ($id) {

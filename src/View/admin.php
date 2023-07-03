@@ -10,12 +10,20 @@
     <link rel="stylesheet" href="/cinetech/public/css/style.css">
     <title>Cinetech administration</title>
     <script type="module" src="/cinetech/public/js/header.js"></script>
+    <script type="module" src="/cinetech/public/js/admin.js"></script>
+
 </head>
 
 <body>
     <?php require_once('includes/header.php'); ?>
 
     <main>
+        <?php 
+        if (!isset($_SESSION['user']) || $_SESSION['user']['id_user'] !== 1) {
+            header('Location: /cinetech'); 
+        }
+        ?>
+
         <div id="main_container">
             <h1>Administration</h1>
             <h2>Utilisateurs</h2>

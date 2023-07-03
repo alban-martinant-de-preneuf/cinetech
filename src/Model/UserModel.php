@@ -48,6 +48,44 @@ class UserModel
         return $user;
     }
 
+    public function getUsers()
+    {
+        $db = DbConnection::getDb();
+        $sql_request = ("SELECT * FROM user");
+        $statement = $db->prepare($sql_request);
+        $statement->execute();
+        $users = $statement->fetchAll(\PDO ::FETCH_ASSOC);
+        return $users;
+    }
+
+    public function modifyUser($id, $user)
+    {
+        $db = DbConnection::getDb();
+        $sql_request = ("UPDATE user
+            SET firstname = :firstname, lastname = :lastname, email = :email
+            WHERE id_user = :id"
+        );
+        $statement = $db->prepare($sql_request);
+        $statement->execute([
+            ':id' => $id,
+            ':firstname' => $user['firstname'],
+            ':lastname' => $user['lastname'],
+            ':email' => $user['email']
+        ]);
+    }
+
+    public function deleteUser($id)
+    {
+        $db = DbConnection::getDb();
+        $sql_request = ("DELETE FROM user
+            WHERE id_user = :id"
+        );
+        $statement = $db->prepare($sql_request);
+        $statement->execute([
+            ':id' => $id
+        ]);
+    }
+
     public function getFavoritesMovies($id)
     {
         $db = DbConnection::getDb();
