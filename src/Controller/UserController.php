@@ -26,7 +26,6 @@ class UserController
         if (isset($_SESSION['user'])) {
             $userModel = new UserModel();
             $favId = $userModel->getFavoriteId($_SESSION['user']['id_user']);
-            var_dump($favId);
             if ($favId) {
                 $userModel->addFavoriteMovie($favId, $id);
             } else {

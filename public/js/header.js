@@ -1,10 +1,10 @@
 import { getData } from "./modules/module.js";
 
 // select elements
-const link = document.getElementById('link')
-const burger = document.getElementById('burger')
-const burgerDiv = document.getElementById('burger_div')
-const ul = document.querySelector('ul')
+const link = document.getElementById('link');
+const burger = document.getElementById('burger');
+const burgerDiv = document.getElementById('burger_div');
+const ul = document.querySelector('ul');
 const main = document.querySelector('main');
 
 // listen for click on burger
@@ -115,7 +115,6 @@ function submitLogInForm(e) {
       if (response.status === 200) {
         window.location.reload();
       } else {
-        console.log(response.statusText);
         const error = document.getElementById('error');
         error.innerHTML = response.statusText;
       }
@@ -125,7 +124,6 @@ function submitLogInForm(e) {
 // function to submit the form to sign in
 function submitSignInForm(e) {
   e.preventDefault();
-  console.log(e.target);
   const data = new FormData(e.target);
   fetch('/cinetech/register', {
     method: 'POST',
@@ -136,7 +134,6 @@ function submitSignInForm(e) {
         document.querySelector('#form_connection').remove();
         displayLogInForm();
       } else {
-        console.log(response.statusText);
         const error = document.getElementById('error');
         error.innerHTML = response.statusText;
       }
@@ -152,7 +149,7 @@ document.getElementById('auth')?.addEventListener('click', (e) => {
   displayLogInForm();
 })
 
-/* search */
+/* search */ 
 
 // select elements
 const searchInput = document.getElementById('search');

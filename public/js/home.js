@@ -64,16 +64,16 @@ async function getContent(div, request, itemType) {
     carousel.id = 'carousel_' + itemType;
     div.appendChild(carousel);
     for (let item of items) {
-        var carouselItem = document.createElement("div");
+        let carouselItem = document.createElement("div");
         carouselItem.className = "carousel_item";
 
-        var link = document.createElement("a");
+        let link = document.createElement("a");
         link.href = "/cinetech/" + itemType + "/" + item.id;
 
-        var imageContainer = document.createElement("div");
+        let imageContainer = document.createElement("div");
         imageContainer.className = "image_container";
 
-        var image = document.createElement("img");
+        let image = document.createElement("img");
         image.src = "https://image.tmdb.org/t/p/w" + imageSize + "/" + item.poster_path;
 
         // Ajouter les éléments dans la structure du DOM
@@ -111,9 +111,6 @@ async function getContent(div, request, itemType) {
 async function dislplayContent() {
     loader();
     const popularDivs = document.getElementsByClassName('popular_div');
-    console.log(popularDivs)
-    console.log(popularDivs[0]);
-    console.log(popularDivs[1])
 
     const moviesDiv = await getContent(
         popularDivs[0],
