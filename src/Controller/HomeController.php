@@ -15,4 +15,8 @@ class HomeController
     function getTvs() {
         require_once('src/View/tvs.php');
     }
+
+    function getAdmin() {
+        require_once('src/View/admin.php');
+    }
 }

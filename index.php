@@ -5,7 +5,7 @@
   use App\Controller\AuthController;
   use App\Controller\UserController;
   use App\Controller\CommentController;
-use App\Model\CommentModel;
+  use App\Model\CommentModel;
 
   session_start();
 
@@ -45,6 +45,11 @@ use App\Model\CommentModel;
   $router->map('GET', '/tvs', function () {
     $homeController = new HomeController();
     $homeController->getTvs();
+  });
+
+  $router->map('GET', '/admin', function () {
+    $homeController = new HomeController();
+    $homeController->getAdmin();
   });
 
   $router->map('GET', '/tvs/[i:id]', function ($id) {
