@@ -70,6 +70,11 @@ function activateModifBtn(button, user) {
                     email: inputEmail
                 })
             });
+            if (res.ok) {
+                e.target.parentNode.parentNode.children[0].children[0].value = inputFirstname;
+                e.target.parentNode.parentNode.children[1].children[0].value = inputLastname;
+                e.target.parentNode.parentNode.children[2].children[0].value = inputEmail;
+            }
         }
     });
 }
@@ -77,6 +82,9 @@ function activateModifBtn(button, user) {
 function activateDeleteBtn(button, user) {
     button.addEventListener('click', async (e) => {
         const res = await fetch('/cinetech/admin/users/delete/' + user.id_user);
+        if (res.ok) {
+            e.target.parentNode.parentNode.remove();
+        }
     });
 }
 
