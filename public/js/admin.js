@@ -40,13 +40,15 @@ async function displayUsers() {
         userCellModif.appendChild(btnModif);
         userRow.appendChild(userCellModif);
 
-        const userCellDelete = document.createElement('td');
-        const btnDelete = document.createElement('input');
-        btnDelete.type = 'submit';
-        btnDelete.value = "Supprimer";
-        activateDeleteBtn(btnDelete, user);
-        userCellDelete.appendChild(btnDelete);
-        userRow.appendChild(userCellDelete);
+        if (user.id_user !== 1) {
+            const userCellDelete = document.createElement('td');
+            const btnDelete = document.createElement('input');
+            btnDelete.type = 'submit';
+            btnDelete.value = "Supprimer";
+            activateDeleteBtn(btnDelete, user);
+            userCellDelete.appendChild(btnDelete);
+            userRow.appendChild(userCellDelete);
+        }
 
         userTable.appendChild(userRow);
     });
