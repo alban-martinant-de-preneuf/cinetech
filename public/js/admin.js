@@ -57,26 +57,28 @@ async function displayUsers() {
 
 function activateModifBtn(button, user) {
     button.addEventListener('click', async (e) => {
-        const inputFirstname = e.target.parentNode.parentNode.children[0].children[0].value;
-        const inputLastname = e.target.parentNode.parentNode.children[1].children[0].value;
-        const inputEmail = e.target.parentNode.parentNode.children[2].children[0].value;
+        if (confirm('Voulez-vous vraiment modifier cet utilisateur ?')) {
+            const inputFirstname = e.target.parentNode.parentNode.children[0].children[0].value;
+            const inputLastname = e.target.parentNode.parentNode.children[1].children[0].value;
+            const inputEmail = e.target.parentNode.parentNode.children[2].children[0].value;
 
-        if (user.firstname !== inputFirstname || user.lastname !== inputLastname || user.email !== inputEmail) {
-            const res = await fetch('/cinetech/admin/users/modify/' + user.id_user, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    firstname: inputFirstname,
-                    lastname: inputLastname,
-                    email: inputEmail
-                })
-            });
-            if (res.ok) {
-                e.target.parentNode.parentNode.children[0].children[0].value = inputFirstname;
-                e.target.parentNode.parentNode.children[1].children[0].value = inputLastname;
-                e.target.parentNode.parentNode.children[2].children[0].value = inputEmail;
+            if (user.firstname !== inputFirstname || user.lastname !== inputLastname || user.email !== inputEmail) {
+                const res = await fetch('/cinetech/admin/users/modify/' + user.id_user, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        firstname: inputFirstname,
+                        lastname: inputLastname,
+                        email: inputEmail
+                    })
+                });
+                if (res.ok) {
+                    e.target.parentNode.parentNode.children[0].children[0].value = inputFirstname;
+                    e.target.parentNode.parentNode.children[1].children[0].value = inputLastname;
+                    e.target.parentNode.parentNode.children[2].children[0].value = inputEmail;
+                }
             }
         }
     });
@@ -84,20 +86,25 @@ function activateModifBtn(button, user) {
 
 function activateUserDeleteBtn(button, user) {
     button.addEventListener('click', async (e) => {
-        const res = await fetch('/cinetech/admin/users/delete/' + user.id_user);
-        if (res.ok) {
-            e.target.parentNode.parentNode.remove();
+        if (confirm('Voulez-vous vraiment supprimer cet utilisateur ?')) {
+            const res = await fetch('/cinetech/admin/users/delete/' + user.id_user);
+            if (res.ok) {
+                e.target.parentNode.parentNode.remove();
+            }
         }
-    });
+    })
 }
+
 
 function activateCommentDeleteBtn(button, comment) {
     button.addEventListener('click', async (e) => {
-        const res = await fetch('/cinetech/admin/comments/delete/' + comment.id_com);
-        if (res.ok) {
-            e.target.parentNode.parentNode.remove();
+        if (confirm('Voulez-vous vraiment supprimer ce commentaire ?')) {
+            const res = await fetch('/cinetech/admin/comments/delete/' + comment.id_com);
+            if (res.ok) {
+                e.target.parentNode.parentNode.remove();
+            }
         }
-    });
+    })
 }
 
 displayUsers();

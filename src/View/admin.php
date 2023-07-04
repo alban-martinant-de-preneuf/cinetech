@@ -32,7 +32,7 @@
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Email</th>
-                    <th>Admin</th>
+                    <th>Modifier</th>
                     <th>Supprimer</th>
                 </tr>
             </table>

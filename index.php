@@ -179,6 +179,6 @@
   if (is_array($match) && is_callable($match['target'])) {
     call_user_func_array($match['target'], $match['params']);
   } else {
-    // no route was matched
-    header($_SERVER["SERVER_PROTOCOL"] . ' 404 Not Found');
+    // redirect to home page
+    header('Location: /cinetech', true, 301);
   }
