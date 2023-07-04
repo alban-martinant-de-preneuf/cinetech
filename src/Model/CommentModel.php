@@ -93,4 +93,24 @@ class CommentModel {
         return $results;
     }
 
+    public function getAllComments()
+    {
+        $db = DbConnection::getDb();
+        $sql_request = ("SELECT * FROM comment");
+        $statement = $db->prepare($sql_request);
+        $statement->execute();
+        $comments = $statement->fetchAll(\PDO ::FETCH_ASSOC);
+        return $comments;
+    }
+
+    public function deleteComment($id)
+    {
+        $db = DbConnection::getDb();
+        $sql_request = ("DELETE FROM comment WHERE id_com = :id");
+        $statement = $db->prepare($sql_request);
+        $statement->execute([
+            ':id' => $id
+        ]);
+    }
+
 }

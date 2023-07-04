@@ -6,7 +6,6 @@
   use App\Controller\UserController;
   use App\Controller\CommentController;
   use App\Controller\AdminController;
-  use App\Model\CommentModel;
 
   session_start();
 
@@ -107,6 +106,16 @@
   $router->map('GET', '/favorites/addtv/[i:id]', function ($id) {
     $userController = new UserController();
     $userController->addFavoriteTv($id);
+  });
+
+  $router->map('GET', '/admin/comments', function () {
+    $adminController = new AdminController();
+    $adminController->getComments();
+  });
+
+  $router->map('GET', '/admin/comments/delete/[i:id]', function ($id) {
+    $adminController = new AdminController();
+    $adminController->deleteComment($id);
   });
 
   $router->map('GET', '/movies/getcomments/[i:id]', function ($id) {

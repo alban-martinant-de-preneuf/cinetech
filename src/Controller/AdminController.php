@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\UserModel;
+use App\Model\CommentModel;
 
 class AdminController
 {
@@ -36,5 +37,18 @@ class AdminController
     {
         $userModel = new UserModel();
         $userModel->deleteUser($id);
+    }
+
+    public function deleteComment($id)
+    {
+        $userModel = new CommentModel();
+        $userModel->deleteComment($id);
+    }
+
+    public function getComments()
+    {
+        $userModel = new CommentModel();
+        $comments = $userModel->getAllComments();
+        echo json_encode($comments);
     }
 }

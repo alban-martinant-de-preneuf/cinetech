@@ -622,13 +622,13 @@ textarea {
 
 /* panel admin */
 
-#user_table {
+.admin_table {
     width: 100%;
     border: 1px solid #e9e9e9;
 }
 
-#user_table td,
-#user_table th {
+.admin_table td,
+.admin_table th {
     border: 1px solid #e9e9e9;
     padding: 5px;
 }

@@ -1,4 +1,6 @@
+/* admin users */
 const userTable = document.getElementById('user_table');
+const users = await getUsers();
 
 async function getUsers() {
     const users = await fetch('/cinetech/admin/users');
@@ -7,7 +9,6 @@ async function getUsers() {
 }
 
 async function displayUsers() {
-    const users = await getUsers();
     users.forEach(user => {
         const userRow = document.createElement('tr');
 
@@ -42,11 +43,11 @@ async function displayUsers() {
 
         if (user.id_user !== 1) {
             const userCellDelete = document.createElement('td');
-            const btnDelete = document.createElement('input');
-            btnDelete.type = 'submit';
-            btnDelete.value = "Supprimer";
-            activateDeleteBtn(btnDelete, user);
-            userCellDelete.appendChild(btnDelete);
+            const btnDeleteUser = document.createElement('input');
+            btnDeleteUser.type = 'submit';
+            btnDeleteUser.value = "Supprimer";
+            activateUserDeleteBtn(btnDeleteUser, user);
+            userCellDelete.appendChild(btnDeleteUser);
             userRow.appendChild(userCellDelete);
         }
 
@@ -81,7 +82,7 @@ function activateModifBtn(button, user) {
     });
 }
 
-function activateDeleteBtn(button, user) {
+function activateUserDeleteBtn(button, user) {
     button.addEventListener('click', async (e) => {
         const res = await fetch('/cinetech/admin/users/delete/' + user.id_user);
         if (res.ok) {
@@ -90,4 +91,57 @@ function activateDeleteBtn(button, user) {
     });
 }
 
+function activateCommentDeleteBtn(button, comment) {
+    button.addEventListener('click', async (e) => {
+        const res = await fetch('/cinetech/admin/comments/delete/' + comment.id_com);
+        if (res.ok) {
+            e.target.parentNode.parentNode.remove();
+        }
+    });
+}
+
 displayUsers();
+
+/* admin comments */
+const commentTable = document.getElementById('comment_table');
+
+async function getComments() {
+    const comments = await fetch('/cinetech/admin/comments');
+    const commentsJson = await comments.json();
+    return commentsJson;
+}
+
+async function displayComments() {
+    const comments = await getComments();
+    let authors = [];
+
+    for (let user of users) {
+        authors[user.id_user] = user.firstname + ' ' + user.lastname;
+    }
+
+    comments.forEach(comment => {
+        const commentRow = document.createElement('tr');
+
+        const commentCellUser = document.createElement('td');
+        authors[comment.id_user] === undefined ? commentCellUser.textContent = 'Utilisateur supprimé' : commentCellUser.textContent = authors[comment.id_user];
+        commentRow.appendChild(commentCellUser);
+
+        const commentCellContent = document.createElement('td');
+        commentCellContent.textContent = comment.content;
+        commentRow.appendChild(commentCellContent);
+
+        const commentCellDelete = document.createElement('td');
+        const btnDeleteComment = document.createElement('input');
+        btnDeleteComment.type = 'submit';
+        btnDeleteComment.value = "Supprimer";
+        activateCommentDeleteBtn(btnDeleteComment, comment);
+        commentCellDelete.appendChild(btnDeleteComment);
+        commentRow.appendChild(commentCellDelete);
+
+        commentTable.appendChild(commentRow);
+
+    });
+}
+
+displayComments();
+
