@@ -62,7 +62,9 @@ function activateModifBtn(button, user) {
             const inputLastname = e.target.parentNode.parentNode.children[1].children[0].value;
             const inputEmail = e.target.parentNode.parentNode.children[2].children[0].value;
 
-            if (user.firstname !== inputFirstname || user.lastname !== inputLastname || user.email !== inputEmail) {
+            if (user.firstname !== inputFirstname
+                || user.lastname !== inputLastname
+                || user.email !== inputEmail) {
                 const res = await fetch('/cinetech/admin/users/modify/' + user.id_user, {
                     method: 'POST',
                     headers: {

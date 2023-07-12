@@ -77,6 +77,20 @@ class UserController
         }
     }
 
+    public function changePwd($pwds)
+    {
+        if (isset($_SESSION['user'])) {
+            $userModel = new UserModel();
+            $user = $userModel->getUser($_SESSION['user']['email']);
+            if (password_verify($pwds['oldPwd'], $user['password'])) {
+                $userModel->changePwd($_SESSION['user']['id_user'], password_hash($pwds['newPwd'], PASSWORD_DEFAULT));
+            } else {
+                header("HTTP/1.1 400 L'ancien mot de passe est incorrect");
+                die();
+            }
+        }
+    }
+
     public function isConnected()
     {
         echo isset($_SESSION['user']) ? 'true' : 'false';

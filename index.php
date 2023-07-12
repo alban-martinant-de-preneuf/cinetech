@@ -52,6 +52,17 @@
     $homeController->getAdmin();
   });
 
+  $router->map('GET', '/profile', function () {
+    $homeController = new HomeController();
+    $homeController->getProfile();
+  });
+
+  $router->map('POST', '/profile/changepwd', function () {
+    $pwds = json_decode(file_get_contents('php://input'), true);
+    $userController = new UserController();
+    $userController->changePwd($pwds);
+  });
+
   $router->map('GET', '/admin/users', function () {
     $adminController = new AdminController();
     $adminController->getUsers();

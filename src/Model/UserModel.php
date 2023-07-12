@@ -179,4 +179,18 @@ class UserModel
         ]);
     }
 
+    public function changePwd($userId, $newPwd)
+    {
+        $db = DbConnection::getDb();
+        $sql_request = ("UPDATE user
+            SET password = :password
+            WHERE id_user = :id"
+        );
+        $statement = $db->prepare($sql_request);
+        $statement->execute([
+            ':id' => $userId,
+            ':password' => $newPwd
+        ]);
+    }
+
 }
