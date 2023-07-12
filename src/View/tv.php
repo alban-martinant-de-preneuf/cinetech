@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="/cinetech/public/css/reset.css">
     <link rel="stylesheet" href="/cinetech/public/css/style.css">
+    <link rel="icon" type="image/png" href="public/img/favicon.png">
     <title>Cinetech</title>
     <script type="module" src="/cinetech/public/js/item.js"></script>
     <script type="module" src="/cinetech/public/js/header.js"></script>
