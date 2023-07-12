@@ -50,7 +50,7 @@ async function getContent() {
     favoriteDiv.appendChild(moviesDiv);
 
     favoriteDiv.innerHTML += '<h2>Séries favorites</h2>';
-    if (favorites.movies.length === 0) {
+    if (favorites.tvs.length === 0) {
         favoriteDiv.innerHTML += "<p>Vous n'avez pas de séries dans vos favoris</p>";
     }
 
