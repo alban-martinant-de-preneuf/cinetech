@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
     <link rel="stylesheet" href="/cinetech/public/css/reset.css">
     <link rel="stylesheet" href="/cinetech/public/css/style.css">
+    <link rel="icon" type="image/png" href="public/img/favicon.png">
     <title>User Profil</title>
     <script type="module" src="/cinetech/public/js/header.js"></script>
     <script type="module" src="/cinetech/public/js/profile.js"></script>
