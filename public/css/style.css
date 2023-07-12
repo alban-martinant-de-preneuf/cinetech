@@ -633,6 +633,18 @@ textarea {
     padding: 5px;
 }
 
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+#pwd_msg {
+    margin-bottom: 5px;
+}
+
 /* media queries */
 
 @media screen and (max-width: 1200px) and (min-width: 700px) {
