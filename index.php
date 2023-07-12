@@ -52,6 +52,11 @@
     $homeController->getAdmin();
   });
 
+  $router->map('GET', '/profile', function () {
+    $homeController = new HomeController();
+    $homeController->getProfile();
+  });
+
   $router->map('GET', '/admin/users', function () {
     $adminController = new AdminController();
     $adminController->getUsers();

@@ -19,4 +19,8 @@ class HomeController
     function getAdmin() {
         require_once('src/View/admin.php');
     }
+
+    function getProfile() {
+        require_once('src/View/profile.php');
+    }
 }
