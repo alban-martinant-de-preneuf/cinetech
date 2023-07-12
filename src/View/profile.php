@@ -25,7 +25,16 @@
 
         <div id="main_container">
             <h1>Mon Profil</h1>
+            <h2>Mes informations</h2>
+            <p>
+                <ul>
+                    <li>Nom : <span id="user_name"><?= $_SESSION['user']['lastname'] ?></span></li>
+                    <li>Prénom : <span id="user_firstname"><?= $_SESSION['user']['firstname'] ?></span></li>
+                    <li>Email : <span id="user_email"><?= $_SESSION['user']['email'] ?></span></li>
+                </ul>
+            </p>
             <h2>Changer mon mot de passe</h2>
+            <p id="pwd_msg"></p>
             <table id="pwd_table" class="admin_table">
                 <tr>
                     <th>Ancien mot de passe</th>
@@ -33,13 +42,11 @@
                     <th>Confirmation du nouveau mot de passe</th>
                     <th>Modifier</th>
                 </tr>
-            </table>
-
-            <h2>Changer mon adresse mail</h2>
-            <table id="usermail_table" class="admin_table">
                 <tr>
-                    <th>E-mail</th>
-                    <th>Modifier</th>
+                    <td><input type="password" id="old_pwd"></td>
+                    <td><input type="password" id="new_pwd"></td>
+                    <td><input type="password" id="new_pwd_confirm"></td>
+                    <td><input type="submit" value="Modifier" id="edit_pwd_btn"></td>
                 </tr>
             </table>
         </div>
