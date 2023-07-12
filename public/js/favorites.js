@@ -7,15 +7,19 @@ async function getContent() {
     favoriteDiv.classList.add('favorite_div');
 
     const favorites = await getData('/cinetech/favoriteslist');
+    console.log(favorites);
 
     favoriteDiv.innerHTML = '<h2>Films favoris</h2>';
+    if (favorites.movies.length === 0) {
+        favoriteDiv.innerHTML += "<p>Vous n'avez pas de films dans vos favoris</p>";
+    }
 
     const moviesDiv = document.createElement('div');
     moviesDiv.classList.add('fav_movies_div', 'flex_wrap');
 
     for (let idMovie of favorites.movies) {
         const movie = await getData(`https://api.themoviedb.org/3/movie/${idMovie}?language=fr-FR`);
-        
+
         const itemDiv = document.createElement("div");
         itemDiv.className = "item_div fav";
 
@@ -46,6 +50,9 @@ async function getContent() {
     favoriteDiv.appendChild(moviesDiv);
 
     favoriteDiv.innerHTML += '<h2>Séries favorites</h2>';
+    if (favorites.movies.length === 0) {
+        favoriteDiv.innerHTML += "<p>Vous n'avez pas de séries dans vos favoris</p>";
+    }
 
     const tvsDiv = document.createElement('div');
     tvsDiv.classList.add('tvs_div', 'flex_wrap');
