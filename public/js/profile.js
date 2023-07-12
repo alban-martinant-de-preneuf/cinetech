@@ -25,11 +25,13 @@ editPwdBtn.addEventListener('click', async (e) => {
         });
         if (res.ok) {
             pwdMsg.innerHTML = 'Mot de passe modifié';
+            pwdMsg.setAttribute('style', 'color: green');
             document.getElementById('old_pwd').value = '';
             document.getElementById('new_pwd').value = '';
             document.getElementById('new_pwd_confirm').value = '';
         } else {
             pwdMsg.innerHTML = res.statusText;
+            pwdMsg.setAttribute('style', 'color: red');
         }
 
     }
