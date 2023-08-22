@@ -24,7 +24,7 @@ editPwdBtn.addEventListener('click', async (e) => {
             })
         });
         if (res.ok) {
-            pwdMsg.innerHTML = 'Le mot de passe modifié à été mis à jour';
+            pwdMsg.innerHTML = 'Le mot de passe à été mis à jour';
             pwdMsg.setAttribute('style', 'color: green');
             document.getElementById('old_pwd').value = '';
             document.getElementById('new_pwd').value = '';

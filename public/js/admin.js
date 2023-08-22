@@ -76,11 +76,6 @@ function activateModifBtn(button, user) {
                         email: inputEmail
                     })
                 });
-                if (res.ok) {
-                    e.target.parentNode.parentNode.children[0].children[0].value = inputFirstname;
-                    e.target.parentNode.parentNode.children[1].children[0].value = inputLastname;
-                    e.target.parentNode.parentNode.children[2].children[0].value = inputEmail;
-                }
             }
         }
     });

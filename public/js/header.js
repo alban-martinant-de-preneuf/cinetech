@@ -56,7 +56,7 @@ function formSignIn() {
         <hr>
       </div>
       <div id="error"></div>
-        <form id="sign_in_form" action="/cinetech/signin" method="POST">
+        <form id="sign_in_form">
           <input type="text" name="email" placeholder="E-mail utilisateur">
           <input type="text" name="firstname" placeholder="Prénom">
           <input type="text" name="lastname" placeholder="Nom">

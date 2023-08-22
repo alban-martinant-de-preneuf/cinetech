@@ -14,9 +14,8 @@
                     <?php if (isset($_SESSION['user'])) : ?>
                         <?php if ($_SESSION['user']['id_user'] == 1) : ?>
                             <li><a href="/cinetech/admin" id="admin">Admin</a></li>
-                        <?php else : ?>
-                            <li><a href="/cinetech/profile" id="profile">Mon profil</a></li>
                         <?php endif; ?>
+                        <li><a href="/cinetech/profile" id="profile">Mon profil</a></li>
                         <li><a href="/cinetech/favorites" id="logout">Mes favoris</a></li>
                         <li><a href="/cinetech/logout" id="logout">Se déconnecter</a></li>
                     <?php else : ?>
